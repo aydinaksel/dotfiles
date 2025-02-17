@@ -1,5 +1,3 @@
-# .bashrc
-
 if [ -f /etc/bashrc ]; then
     . /etc/bashrc
 fi
@@ -34,4 +32,3 @@ bind "TAB:menu-complete"
 alias upgrade="sudo dnf upgrade"
 alias untar="tar xzvf"
 alias bye="shutdown now"
-
