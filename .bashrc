@@ -1,7 +1,3 @@
-if [ -f /etc/bashrc ]; then
-    . /etc/bashrc
-fi
-
 export PATH="$HOME/.local/bin:$HOME/.cargo/bin:$PATH"
 
 export XDG_DATA_HOME="$HOME/.local/share"
@@ -25,6 +21,8 @@ export PYTHON_HISTORY="$XDG_STATE_HOME/python/history"
 export SF_DISABLE_TELEMETRY=true
 export SF_HIDE_RELEASE_NOTES_FOOTER=true
 export SF_HIDE_RELEASE_NOTES=true
+
+export GOPATH=$HOME/Projects/go
 
 bind "set show-all-if-ambiguous on"
 bind "TAB:menu-complete"

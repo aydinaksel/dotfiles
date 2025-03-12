@@ -1,5 +1,9 @@
 [user]
-    name = Aydin Aksel
-    email = 154738769+aydinaksel@users.noreply.github.com
+	name = Aydin Aksel
+	email = 154738769+aydinaksel@users.noreply.github.com
 [core]
-    editor = nvim
+	editor = nvim
+[init]
+	defaultBranch = main
+[color]
+	ui = auto
