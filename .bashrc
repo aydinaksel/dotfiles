@@ -30,5 +30,3 @@ bind "TAB:menu-complete"
 alias upgrade="sudo dnf upgrade"
 alias untar="tar xzvf"
 alias bye="shutdown now"
-
-. "$HOME/.local/share/../bin/env"
