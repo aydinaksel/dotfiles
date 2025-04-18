@@ -17,12 +17,12 @@ export NPM_CONFIG_INIT_MODULE="$XDG_CONFIG_HOME/npm/config/npm-init.js"
 export NPM_CONFIG_CACHE="$XDG_CACHE_HOME/npm"
 export NPM_CONFIG_TMP="$XDG_RUNTIME_DIR/npm"
 export PYTHON_HISTORY="$XDG_STATE_HOME/python/history"
+export GOPATH="$HOME/.local/share/go"
+export PATH="$PATH:$GOPATH/bin"
 
 export SF_DISABLE_TELEMETRY=true
 export SF_HIDE_RELEASE_NOTES_FOOTER=true
 export SF_HIDE_RELEASE_NOTES=true
-
-export GOPATH=$HOME/Projects/go
 
 bind "set show-all-if-ambiguous on"
 bind "TAB:menu-complete"
