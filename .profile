@@ -1,5 +1,3 @@
-export PATH="$HOME/.local/bin:$HOME/.cargo/bin:$GOPATH/bin:$PATH"
-
 export XDG_DATA_HOME="$HOME/.local/share"
 export XDG_CONFIG_HOME="$HOME/.config"
 export XDG_STATE_HOME="$HOME/.local/state"
@@ -18,6 +16,8 @@ export NPM_CONFIG_CACHE="$XDG_CACHE_HOME/npm"
 export NPM_CONFIG_TMP="$XDG_RUNTIME_DIR/npm"
 export PYTHON_HISTORY="$XDG_STATE_HOME/python/history"
 export GOPATH="$HOME/.local/share/go"
+
+export PATH="$HOME/.local/bin:$HOME/.cargo/bin:$GOPATH/bin:$PATH"
 
 if [ -f ~/.bashrc ]; then
     . ~/.bashrc
