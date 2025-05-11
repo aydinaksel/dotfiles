@@ -3,7 +3,6 @@ export XDG_CONFIG_HOME="$HOME/.config"
 export XDG_STATE_HOME="$HOME/.local/state"
 export XDG_CACHE_HOME="$HOME/.cache"
 
-export SSH_AUTH_SOCK="$HOME/.bitwarden-ssh-agent.sock"
 export EDITOR="$HOME/apps/Neovim.AppImage"
 export AWS_CONFIG_FILE="$XDG_CONFIG_HOME/aws/config"
 export AWS_SHARED_CREDENTIALS_FILE="$XDG_CONFIG_HOME/aws/credentials"
