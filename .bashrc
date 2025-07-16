@@ -1,3 +1,11 @@
+if [ -f /etc/bashrc ]; then
+    . /etc/bashrc
+fi
+
+if [ -f "$HOME/.profile" ]; then
+    . "$HOME/.profile"
+fi
+
 bind "set show-all-if-ambiguous on"
 bind "TAB:menu-complete"
 
