@@ -1,0 +1,15 @@
+tap "homebrew/bundle"
+
+cask "1password"
+cask "bitwarden"
+cask "claude-code"
+cask "firefox@developer-edition"
+cask "ghostty"
+cask "notion"
+cask "pritunl"
+cask "slack"
+
+brew "git"
+brew "neovim"
+brew "python"
+brew "ripgrep"
