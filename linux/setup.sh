@@ -2,18 +2,22 @@
 
 set -e
 
-LINUX_DIR="$(cd "$(dirname "$0")" && pwd)"
+LINUX_DIR="$(cd "$(dirname "${BASH_SOURCE[0]}")" && pwd)"
 DOTFILES_DIR="$(dirname "$LINUX_DIR")"
 
 echo "Starting Linux setup..."
 echo "========================"
 
-echo -e "\n[1/2] Symlinking dotfiles..."
+echo -e "\n[1/3] Symlinking dotfiles..."
 ln -sf "$LINUX_DIR/.bashrc" ~/.bashrc
 ln -sf "$LINUX_DIR/.profile" ~/.profile
 ln -sf "$DOTFILES_DIR/.gitconfig" ~/.gitconfig
 
-echo -e "\n[2/2] Sourcing profile..."
+echo -e "\n[2/3] Symlinking Claude config..."
+mkdir -p ~/.claude
+ln -sf "$DOTFILES_DIR/.claude/CLAUDE.md" ~/.claude/CLAUDE.md
+
+echo -e "\n[3/3] Sourcing profile..."
 source ~/.profile
 
 echo -e "\n========================"

@@ -2,16 +2,21 @@
 
 set -e
 
-MACOS_DIR="$(cd "$(dirname "$0")" && pwd)"
+MACOS_DIR="$(cd "$(dirname "${BASH_SOURCE[0]:-$0}")" && pwd)"
+DOTFILES_DIR="$(dirname "$MACOS_DIR")"
 
 echo "Starting macOS setup..."
 echo "========================"
 
-echo "\n[1/2] Setting up Homebrew..."
+echo -e "\n[1/3] Setting up Homebrew..."
 source "$MACOS_DIR/scripts/brew.sh"
 
-echo "\n[2/2] Installing applications..."
+echo -e "\n[2/3] Installing applications..."
 source "$MACOS_DIR/scripts/apps.sh"
 
-echo "\n========================"
+echo -e "\n[3/3] Symlinking Claude config..."
+mkdir -p ~/.claude
+ln -sf "$DOTFILES_DIR/.claude/CLAUDE.md" ~/.claude/CLAUDE.md
+
+echo -e "\n========================"
 echo "macOS setup complete!"
