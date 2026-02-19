@@ -23,9 +23,9 @@ export PYTHON_HISTORY="$XDG_STATE_HOME/python/history"
 
 export GOPATH="$HOME/.local/share/go"
 export NPMPATH="$HOME/.local/lib/npm-global"
-export SF_AC_BASH_COMPFUNC_PATH="$HOME/.cache/sf/autocomplete/functions/bash/sf.bash"
 
-# Prompt Customization
+export SF_DISABLE_TELEMETRY="true"
+
 FIRST_PROMPT=1
 PROMPT_COMMAND='
   if [ $FIRST_PROMPT -eq 0 ]; then
