@@ -25,6 +25,7 @@ export GOPATH="$HOME/.local/share/go"
 export NPMPATH="$HOME/.local/lib/npm-global"
 
 export SF_DISABLE_TELEMETRY="true"
+export SF_AC_BASH_SETUP_PATH="$XDG_CACHE_HOME/sf/autocomplete/bash_setup"
 
 FIRST_PROMPT=1
 PROMPT_COMMAND='
