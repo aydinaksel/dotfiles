@@ -8,13 +8,10 @@ DOTFILES_DIR="$(dirname "$MACOS_DIR")"
 echo "Starting macOS setup..."
 echo "========================"
 
-echo -e "\n[1/3] Setting up Homebrew..."
-source "$MACOS_DIR/scripts/brew.sh"
+echo -e "\n[1/2] Installing packages..."
+source "$DOTFILES_DIR/install/macos.sh"
 
-echo -e "\n[2/3] Installing applications..."
-source "$MACOS_DIR/scripts/apps.sh"
-
-echo -e "\n[3/3] Symlinking Claude config..."
+echo -e "\n[2/2] Symlinking Claude config..."
 mkdir -p ~/.claude
 ln -sf "$DOTFILES_DIR/.claude/CLAUDE.md" ~/.claude/CLAUDE.md
 

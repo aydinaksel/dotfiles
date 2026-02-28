@@ -36,6 +36,6 @@ PROMPT_COMMAND='
 '
 export PS1="\[\033[0;36m\][\u@\h \W]\$\[\033[0m\] "
 
-export PATH="$HOME/bin:$HOME/.local/bin:$HOME/.cargo/bin:$GOPATH/bin:$NPMPATH/bin:$PATH"
+export PATH="$HOME/bin:$HOME/.local/bin:$HOME/.local/share/cargo/bin/:$GOPATH/bin:$NPMPATH/bin:$PATH"
 
 . "$HOME/.local/share/../bin/env"
