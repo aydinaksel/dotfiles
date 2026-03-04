@@ -6,3 +6,6 @@
 4. Include units in the name. For example, instead of `delay` use `delaySeconds`.
 
 **Exception:** `err` is allowed in Go since `error` shadows the built-in type.
+
+5. Don't name modules or classes `utils`, `helpers`, or similar — reorganize the code into modules with descriptive names instead.
+6. Don't prefix class names with `Base` or `Abstract` — rename the child class to be more specific instead. The parent class should hold the general name.
