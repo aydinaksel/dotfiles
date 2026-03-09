@@ -10,6 +10,14 @@
 5. Don't name modules or classes `utils`, `helpers`, or similar — reorganize the code into modules with descriptive names instead.
 6. Don't prefix class names with `Base` or `Abstract` — rename the child class to be more specific instead. The parent class should hold the general name.
 
+These rules apply to SQL as well:
+
+- No single-letter table aliases (`f`, `l`, `v`). Use the full table name or a full descriptive
+  alias (e.g. `home_team`, `away_team`).
+- No abbreviated aliases (`ht`, `awt`).
+- Only qualify a column with its table name when there is genuine ambiguity — i.e. the same
+  column name appears in more than one joined table. Do not prefix every column by default.
+
 # Comments
 
 Avoid comments. If you feel the need to write one, first try to make the code self-documenting:
@@ -29,3 +37,7 @@ Write documentation for public APIs and high-level architecture, not implementat
 
 If you need more than 3 levels of indentation, you're screwed anyway, and you
 should fix your program.
+
+# Prettify
+
+- Follow the [Google Markdown style guide](https://google.github.io/styleguide/docguide/style.html) when editing this and other Markdown files.

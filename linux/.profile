@@ -13,6 +13,8 @@ export HISTFILE="$XDG_STATE_HOME/bash/history"
 export CARGO_HOME="$XDG_DATA_HOME/cargo"
 export RUSTUP_HOME="$XDG_DATA_HOME/rustup"
 
+export DOCKER_CONFIG="${XDG_CONFIG_HOME}/docker"
+
 export GNUPGHOME="$XDG_DATA_HOME/gnupg"
 
 export NPM_CONFIG_INIT_MODULE="$XDG_CONFIG_HOME/npm/config/npm-init.js"
@@ -26,6 +28,8 @@ export NPMPATH="$HOME/.local/lib/npm-global"
 
 export SF_DISABLE_TELEMETRY="true"
 export SF_AC_BASH_SETUP_PATH="$XDG_CACHE_HOME/sf/autocomplete/bash_setup"
+
+export _JAVA_OPTIONS="-Djava.util.prefs.userRoot="$XDG_CONFIG_HOME"/java"
 
 FIRST_PROMPT=1
 PROMPT_COMMAND='

@@ -11,7 +11,8 @@ echo "========================"
 echo -e "\n[1/3] Symlinking dotfiles..."
 ln -sf "$LINUX_DIR/.bashrc" ~/.bashrc
 ln -sf "$LINUX_DIR/.profile" ~/.profile
-ln -sf "$DOTFILES_DIR/.gitconfig" ~/.gitconfig
+mkdir -p ~/.config/git
+ln -sf "$DOTFILES_DIR/git/config" ~/.config/git/config
 
 echo -e "\n[2/3] Symlinking Claude config..."
 mkdir -p ~/.claude
