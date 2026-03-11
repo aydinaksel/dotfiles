@@ -2,7 +2,7 @@
 
 set -e
 
-INSTALL_DIR="$(cd "$(dirname "$0")" && pwd)"
+INSTALL_DIRECTORY="$(cd "$(dirname "$0")" && pwd)"
 
 echo "Installing packages on macOS..."
 
@@ -18,6 +18,6 @@ else
 fi
 
 brew update
-brew bundle --file="$INSTALL_DIR/Brewfile"
+brew bundle --file="$INSTALL_DIRECTORY/Brewfile"
 
 echo "macOS packages installed."
