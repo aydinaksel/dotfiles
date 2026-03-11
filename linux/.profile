@@ -31,14 +31,16 @@ export SF_AC_BASH_SETUP_PATH="$XDG_CACHE_HOME/sf/autocomplete/bash_setup"
 
 export _JAVA_OPTIONS="-Djava.util.prefs.userRoot="$XDG_CONFIG_HOME"/java"
 
-FIRST_PROMPT=1
-PROMPT_COMMAND='
-  if [ $FIRST_PROMPT -eq 0 ]; then
-    printf "\n"
-  fi
-  FIRST_PROMPT=0
-'
-export PS1="\[\033[0;36m\][\u@\h \W]\$\[\033[0m\] "
+# Commented out since `starship` is used
+#
+#FIRST_PROMPT=1
+#PROMPT_COMMAND='
+#  if [ $FIRST_PROMPT -eq 0 ]; then
+#    printf "\n"
+#  fi
+#  FIRST_PROMPT=0
+#'
+#export PS1="\[\033[0;36m\][\u@\h \W]\$\[\033[0m\] "
 
 export PATH="$HOME/bin:$HOME/.local/bin:$HOME/.local/share/cargo/bin/:$GOPATH/bin:$NPMPATH/bin:$PATH"
 

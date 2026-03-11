@@ -14,6 +14,11 @@ ln -sf "$LINUX_DIRECTORY/.profile" ~/.profile
 mkdir -p ~/.config/git
 ln -sf "$DOTFILES_DIRECTORY/git/config" ~/.config/git/config
 ln -sf "$LINUX_DIRECTORY/starship.toml" ~/.config/starship.toml
+mkdir -p ~/.config/fish/functions
+ln -sf "$LINUX_DIRECTORY/config.fish" ~/.config/fish/config.fish
+for file in "$LINUX_DIRECTORY/fish_functions/"*.fish
+    ln -sf "$file" ~/.config/fish/functions/"$(basename "$file")"
+done
 
 echo -e "\n[2/3] Symlinking Claude config..."
 mkdir -p ~/.claude

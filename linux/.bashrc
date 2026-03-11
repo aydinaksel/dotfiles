@@ -15,6 +15,7 @@ alias bye="shutdown now"
 alias addreqs='xclip -selection clipboard -o | tr " " "\n" | sort -u >> requirements.txt'
 alias copy='xclip -selection clipboard'
 alias paste='xclip -selection clipboard -o'
+alias nvimconfig='cd ~/.config/nvim'
 
 csvpeek() {
   local file=$1
@@ -25,3 +26,5 @@ csvpeek() {
 [ -f "$SF_AC_BASH_SETUP_PATH" ] && source "$SF_AC_BASH_SETUP_PATH"
 
 . "$HOME/.local/share/../bin/env"
+
+eval "$(starship init bash)"
