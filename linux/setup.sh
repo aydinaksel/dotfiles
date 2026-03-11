@@ -16,7 +16,7 @@ ln -sf "$DOTFILES_DIRECTORY/git/config" ~/.config/git/config
 ln -sf "$LINUX_DIRECTORY/starship.toml" ~/.config/starship.toml
 mkdir -p ~/.config/fish/functions
 ln -sf "$LINUX_DIRECTORY/config.fish" ~/.config/fish/config.fish
-for file in "$LINUX_DIRECTORY/fish_functions/"*.fish
+for file in "$LINUX_DIRECTORY/fish_functions/"*.fish; do
     ln -sf "$file" ~/.config/fish/functions/"$(basename "$file")"
 done
 
