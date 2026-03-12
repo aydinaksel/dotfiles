@@ -26,6 +26,8 @@ set -x _JAVA_OPTIONS "-Djava.util.prefs.userRoot=$XDG_CONFIG_HOME/java"
 
 set -x SF_DISABLE_TELEMETRY true
 
+set -g fish_greeting ""
+
 fish_add_path $HOME/bin $HOME/.local/bin $CARGO_HOME/bin $GOPATH/bin $NPMPATH/bin
 
 if test -f $HOME/.local/bin/env.fish
@@ -35,8 +37,8 @@ end
 alias upgrade "sudo dnf upgrade"
 alias untar "tar xvf"
 alias bye "shutdown now"
-alias copy "xclip -selection clipboard"
-alias paste "xclip -selection clipboard -o"
+alias copy "wl-copy"
+alias paste "wl-paste"
 alias nvimconfig "cd ~/.config/nvim"
 alias addreqs "xclip -selection clipboard -o | tr ' ' '\n' | sort -u >> requirements.txt"
 
