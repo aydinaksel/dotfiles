@@ -3,7 +3,9 @@ set -x XDG_CONFIG_HOME $HOME/.config
 set -x XDG_STATE_HOME $HOME/.local/state
 set -x XDG_CACHE_HOME $HOME/.cache
 
-set -x EDITOR /usr/bin/nvim
+set -x LOCAL_BINARIES $HOME/.local/bin
+
+set -x EDITOR $LOCAL_BINARIES/nvim
 
 set -x AWS_CONFIG_FILE $XDG_CONFIG_HOME/aws/config
 set -x AWS_SHARED_CREDENTIALS_FILE $XDG_CONFIG_HOME/aws/credentials
