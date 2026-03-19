@@ -22,6 +22,8 @@ set -x NPM_CONFIG_INIT_MODULE $XDG_CONFIG_HOME/npm/config/npm-init.js
 set -x NPM_CONFIG_CACHE $XDG_CACHE_HOME/npm
 set -x NPM_CONFIG_TMP $XDG_RUNTIME_DIR/npm
 
+set -x CLAUDE_CODE_QUIET_STARTUP 1
+
 set -x PYTHON_HISTORY $XDG_STATE_HOME/python/history
 
 set -x _JAVA_OPTIONS "-Djava.util.prefs.userRoot=$XDG_CONFIG_HOME/java"

@@ -23,6 +23,7 @@ done
 echo -e "\n[2/3] Symlinking Claude config..."
 mkdir -p ~/.claude
 ln -sf "$DOTFILES_DIRECTORY/.claude/CLAUDE.md" ~/.claude/CLAUDE.md
+ln -sf "$DOTFILES_DIRECTORY/.claude/settings.json" ~/.claude/settings.json
 
 echo -e "\n[3/3] Sourcing profile..."
 source ~/.profile
