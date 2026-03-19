@@ -35,8 +35,11 @@ Write documentation for public APIs and high-level architecture, not implementat
 
 # Never Nester
 
-If you need more than 3 levels of indentation, you're screwed anyway, and you
-should fix your program.
+If you need more than 3 levels of indentation, you're screwed anyway, and you should fix your program.
+
+# Writing Style
+
+- Never use em dashes. Use periods or commas instead, or restructure the sentence.
 
 # Prettify
 
