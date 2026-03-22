@@ -19,6 +19,8 @@ ln -sf "$LINUX_DIRECTORY/config.fish" ~/.config/fish/config.fish
 for file in "$LINUX_DIRECTORY/fish_functions/"*.fish; do
     ln -sf "$file" ~/.config/fish/functions/"$(basename "$file")"
 done
+mkdir -p ~/.config/tmux
+ln -sf "$LINUX_DIRECTORY/tmux.conf" ~/.config/tmux/tmux.conf
 
 echo -e "\n[2/3] Symlinking Claude config..."
 mkdir -p ~/.claude
