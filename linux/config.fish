@@ -46,4 +46,9 @@ alias paste "wl-paste"
 alias nvimconfig "cd ~/.config/nvim"
 alias addreqs "xclip -selection clipboard -o | tr ' ' '\n' | sort -u >> requirements.txt"
 
+if status is-interactive
+    keychain --quiet --nogui --agents ssh id_ed25519_github_2026-02-27
+    source ~/.keychain/(hostname)-fish
+end
+
 starship init fish | source
