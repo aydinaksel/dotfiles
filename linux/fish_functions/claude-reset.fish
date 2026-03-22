@@ -4,7 +4,8 @@ function claude-reset --description "Clear Claude context: shell snapshots, task
     for directory in shell-snapshots tasks projects todos
         set --local target $claude_directory/$directory
         if test -d $target
-            rm -rf $target/*
+            rm -rf -- $target/
+            mkdir $target
         end
     end
 
