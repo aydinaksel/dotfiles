@@ -51,6 +51,8 @@ if status is-interactive
     switch (hostname)
         case zeus
             set ssh_key_names id_ed25519_github_2026-02-27
+        case hades
+            set ssh_key_names github_framework
     end
     for key_name in $ssh_key_names
         set key_path $HOME/.ssh/$key_name
