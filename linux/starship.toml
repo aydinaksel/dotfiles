@@ -4,13 +4,12 @@
 add_newline = false
 continuation_prompt = "[▸▹ ](dimmed white)"
 
-format = """($nix_shell$container$fill$git_metrics\n)$cmd_duration\
+format = """($nix_shell$container$fill\n)$cmd_duration\
 $username\
 $hostname\
 $shlvl\
 $shell\
 $env_var\
-$jobs\
 $character"""
 
 right_format = """
@@ -54,8 +53,8 @@ format = "[$user](bright-red bold italic)"
 [hostname]
 disabled = false
 ssh_only = false
-format = "[@$hostname](bright-yellow bold italic)[$ssh_symbol](bold green italic) "
-ssh_symbol = " on ssh"
+format = "[@$hostname](bright-yellow bold italic)[$ssh_symbol](bold red italic) "
+ssh_symbol = " ON SSH"
 
 [directory]
 home_symbol = "HOME"
@@ -75,11 +74,6 @@ format = '[$path]($style)[$read_only]($read_only_style)'
 
 [cmd_duration]
 format = "[command lasted $duration ](italic white)"
-
-[jobs]
-format = "[$symbol$number]($style) "
-style = "white"
-symbol = "[▶](blue italic)"
 
 [time]
 disabled = false
