@@ -47,8 +47,21 @@ alias nvimconfig "cd ~/.config/nvim"
 alias addreqs "xclip -selection clipboard -o | tr ' ' '\n' | sort -u >> requirements.txt"
 
 if status is-interactive
-    keychain --quiet --nogui --agents ssh id_ed25519_github_2026-02-27
-    source ~/.keychain/(hostname)-fish
+    set ssh_keys
+    switch (hostname)
+        case zeus
+            set ssh_key_names id_ed25519_github_2026-02-27
+    end
+    for key_name in $ssh_key_names
+        set key_path $HOME/.ssh/$key_name
+        if test -f $key_path
+            set -a ssh_keys $key_path
+        end
+    end
+    if test (count $ssh_keys) -gt 0
+        keychain --quiet --nogui $ssh_keys
+        source ~/.keychain/(hostname)-fish
+    end
 end
 
 starship init fish | source
