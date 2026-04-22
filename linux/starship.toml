@@ -58,9 +58,9 @@ ssh_symbol = " ON SSH"
 
 [directory]
 home_symbol = "HOME"
-truncation_length = 2
+truncation_length = 1
 truncate_to_repo = false
-truncation_symbol = "../"
+# truncation_symbol = "../"
 read_only = " 󰌾"
 use_os_path_sep = true
 style = "bold italic blue"

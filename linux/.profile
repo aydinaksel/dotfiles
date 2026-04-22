@@ -45,3 +45,5 @@ export _JAVA_OPTIONS="-Djava.util.prefs.userRoot="$XDG_CONFIG_HOME"/java"
 export PATH="$HOME/bin:$HOME/.local/bin:$HOME/.local/share/cargo/bin/:$GOPATH/bin:$NPMPATH/bin:$PATH"
 
 . "$HOME/.local/share/../bin/env"
+
+if [ -e /home/aydin/.nix-profile/etc/profile.d/nix.sh ]; then . /home/aydin/.nix-profile/etc/profile.d/nix.sh; fi # added by Nix installer
