@@ -20,6 +20,9 @@ tools=(
     alacritty
     xh
     nu
+    gitui
+    du-dust
+    zellij
 )
 
 echo "Ensuring rustup is installed and up to date..."
