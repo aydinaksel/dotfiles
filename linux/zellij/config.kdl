@@ -393,7 +393,10 @@ default_shell "nu"
 // copy_command "xclip -selection clipboard" // x11
 // copy_command "wl-copy"                    // wayland
 // copy_command "pbcopy"                     // osx
-copy_command "wl-copy"
+//
+// Leave unset on headless hosts so Zellij falls back to OSC 52,
+// which forwards the copy through SSH to the local terminal's clipboard.
+// copy_command "wl-copy"
 
 // Choose the destination for copied text
 // Allows using the primary selection buffer (on x11/wayland) instead of the system clipboard.

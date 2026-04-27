@@ -23,8 +23,26 @@ $env.config = {
 alias upgrade = sudo dnf upgrade
 alias untar = tar xvf
 alias bye = shutdown now
-alias copy = wl-copy
-alias paste = wl-paste
+def copy [] {
+  if ($env.WAYLAND_DISPLAY? | is-not-empty) {
+    $in | wl-copy
+  } else if ($env.DISPLAY? | is-not-empty) {
+    $in | xclip -selection clipboard
+  } else {
+    let encoded = ($in | encode base64)
+    print -n $"\e]52;c;($encoded)\a"
+  }
+}
+
+def paste [] {
+  if ($env.WAYLAND_DISPLAY? | is-not-empty) {
+    wl-paste
+  } else if ($env.DISPLAY? | is-not-empty) {
+    xclip -selection clipboard -o
+  } else {
+    error make { msg: "paste not supported over OSC 52 (write-only)" }
+  }
+}
 alias nvimconfig = cd ~/.config/nvim
 alias ll = ls -la
 alias la = ls -a
