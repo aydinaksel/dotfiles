@@ -17,13 +17,22 @@ tools=(
     ripgrep
     starship
     tree-sitter-cli
-    alacritty
     xh
     nu
     gitui
     du-dust
     zellij
 )
+
+gui_tools=(
+    alacritty
+)
+
+if [[ "$OSTYPE" == "darwin"* ]] || command -v Xorg &>/dev/null || command -v Xwayland &>/dev/null; then
+    tools+=("${gui_tools[@]}")
+else
+    echo "Headless system detected; skipping GUI tools: ${gui_tools[*]}"
+fi
 
 echo "Ensuring rustup is installed and up to date..."
 mkdir -p "$(dirname "$RUSTUP_BINARY")"
