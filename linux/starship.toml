@@ -4,16 +4,7 @@
 add_newline = false
 continuation_prompt = "[▸▹ ](dimmed white)"
 
-format = """($nix_shell$container$fill\n)$cmd_duration\
-$username\
-$hostname\
-$shlvl\
-$shell\
-$env_var\
-$character"""
-
-right_format = """
-$directory\
+format = """($nix_shell$container$fill\n)$directory\
 $git_branch\
 $git_commit\
 $git_state\
@@ -22,7 +13,13 @@ $memory_usage\
 $custom\
 $status\
 $os\
-$time"""
+$time\n$cmd_duration\
+$username\
+$hostname\
+$shlvl\
+$shell\
+$env_var\
+$character"""
 
 [fill]
 symbol = ' '
