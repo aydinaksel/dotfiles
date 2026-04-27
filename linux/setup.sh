@@ -21,6 +21,16 @@ for file in "$LINUX_DIRECTORY/fish_functions/"*.fish; do
 done
 mkdir -p ~/.config/tmux
 ln -sf "$LINUX_DIRECTORY/tmux.conf" ~/.config/tmux/tmux.conf
+mkdir -p ~/.config/alacritty/themes
+ln -sf "$LINUX_DIRECTORY/alacritty/alacritty.toml" ~/.config/alacritty/alacritty.toml
+for file in "$LINUX_DIRECTORY/alacritty/themes/"*.toml; do
+    ln -sf "$file" ~/.config/alacritty/themes/"$(basename "$file")"
+done
+mkdir -p ~/.config/zellij
+ln -sf "$LINUX_DIRECTORY/zellij/config.kdl" ~/.config/zellij/config.kdl
+mkdir -p ~/.config/nushell
+ln -sf "$LINUX_DIRECTORY/nu/env.nu" ~/.config/nushell/env.nu
+ln -sf "$LINUX_DIRECTORY/nu/config.nu" ~/.config/nushell/config.nu
 
 echo -e "\n[2/3] Symlinking Claude config..."
 mkdir -p ~/.claude
