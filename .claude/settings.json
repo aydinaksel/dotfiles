@@ -20,6 +20,5 @@
   },
   "spinnerTipsEnabled": false,
   "effortLevel": "medium",
-  "prefersReducedMotio": true,
-  "model": "sonnet"
+  "prefersReducedMotio": true
 }
