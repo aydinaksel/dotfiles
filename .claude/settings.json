@@ -10,7 +10,22 @@
       "Bash(git -C * diff)",
       "Bash(git add *)",
       "Bash(git commit -m ' *)",
-      "Bash(cargo check *)"
+      "Bash(cargo check *)",
+      "Bash(cargo search:*)",
+      "Bash(docker exec postgres psql -U admin -d demeter -c \"SELECT *)",
+      "Bash(docker exec postgres psql -U admin -d demeter -c 'SELECT *)",
+      "WebSearch",
+      "WebFetch(domain:crates.io)",
+      "WebFetch(domain:docs.rs)",
+      "WebFetch(domain:github.com)",
+      "WebFetch(domain:raw.githubusercontent.com)",
+      "WebFetch(domain:fly.io)",
+      "WebFetch(domain:book.leptos.dev)",
+      "WebFetch(domain:davidchipperfield.com)",
+      "WebFetch(domain:api.quickfile.co.uk)",
+      "WebFetch(domain:kemset.com)",
+      "WebFetch(domain:obsidian.md)",
+      "WebFetch(domain:help.obsidian.md)"
     ],
     "deny": [
       "Read(./.env)",

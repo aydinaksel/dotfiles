@@ -31,7 +31,9 @@ ln -sf "$LINUX_DIRECTORY/zellij/config.kdl" ~/.config/zellij/config.kdl
 mkdir -p ~/.config/nushell/autoload
 ln -sf "$LINUX_DIRECTORY/nu/env.nu" ~/.config/nushell/env.nu
 ln -sf "$LINUX_DIRECTORY/nu/config.nu" ~/.config/nushell/config.nu
-ln -sf "$LINUX_DIRECTORY/nu/autoload/claude-reset.nu" ~/.config/nushell/autoload/claude-reset.nu
+for file in "$LINUX_DIRECTORY/nu/autoload/"*.nu; do
+    ln -sf "$file" ~/.config/nushell/autoload/"$(basename "$file")"
+done
 
 echo -e "\n[2/3] Symlinking Claude config..."
 mkdir -p ~/.claude
