@@ -10,6 +10,7 @@
       "Bash(git -C * diff)",
       "Bash(git add *)",
       "Bash(git commit -m ' *)",
+      "Bash(gh search *)",
       "Bash(cargo check *)",
       "Bash(cargo search:*)",
       "Bash(docker exec postgres psql -U admin -d demeter -c \"SELECT *)",
