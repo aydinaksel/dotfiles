@@ -28,4 +28,6 @@ def claude-reset [] {
     }
 
     print "Claude context cleared."
+
+    claude-prune-projects
 }
