@@ -74,7 +74,7 @@ format = "[command lasted $duration ](italic white)"
 
 [time]
 disabled = false
-format = "[ $time](italic dimmed white)"
+format = "[$time](italic dimmed white)"
 time_format = "%R"
 utc_time_offset = "local"
 
@@ -82,7 +82,7 @@ utc_time_offset = "local"
 format = " [ $symbol $branch ](fg:#769ff0 bg:#394260)"
 symbol = ""
 truncation_symbol = "..."
-truncation_length = 11
+#truncation_length = 11
 ignore_branches = ["main", "master"]
 only_attached = true
 

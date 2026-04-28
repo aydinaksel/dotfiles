@@ -22,6 +22,7 @@ tools=(
     gitui
     du-dust
     zellij
+    just
 )
 
 gui_tools=(
