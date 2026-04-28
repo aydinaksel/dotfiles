@@ -1,9 +1,23 @@
-# Delete per-repo .claude/settings.local.json files under ~/*/.claude/.
+# Delete per-repo .claude/settings.local.json files anywhere under $HOME.
 # These are prompt-cache files accumulated from "yes forever" approvals.
 # Consolidated permissions live in ~/.claude/settings.json instead.
 # Skips .claude directories that contain other files (e.g. session locks).
+# Skips ~/.claude itself (the global config).
 def claude-prune-projects [] {
-    let entries = (glob ~/*/.claude/settings.local.json)
+    let entries = (
+        glob ~/**/.claude/settings.local.json
+            --depth 6
+            --exclude [
+                ".claude/**"
+                "**/node_modules/**"
+                "**/.git/**"
+                "**/target/**"
+                "**/dist/**"
+                "**/build/**"
+                "**/.venv/**"
+                "**/venv/**"
+            ]
+    )
 
     if ($entries | is-empty) {
         print "No per-repo settings.local.json files found."
