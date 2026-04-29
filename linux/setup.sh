@@ -26,6 +26,11 @@ ln -sf "$LINUX_DIRECTORY/alacritty/alacritty.toml" ~/.config/alacritty/alacritty
 for file in "$LINUX_DIRECTORY/alacritty/themes/"*.toml; do
     ln -sf "$file" ~/.config/alacritty/themes/"$(basename "$file")"
 done
+mkdir -p ~/.config/gitui
+for file in "$LINUX_DIRECTORY/gitui/"*.ron; do
+    ln -sf "$file" ~/.config/gitui/"$(basename "$file")"
+done
+ln -sf "$LINUX_DIRECTORY/gitui/catppuccin-macchiato.ron" ~/.config/gitui/theme.ron
 mkdir -p ~/.config/zellij
 ln -sf "$LINUX_DIRECTORY/zellij/config.kdl" ~/.config/zellij/config.kdl
 mkdir -p ~/.config/nushell/autoload
