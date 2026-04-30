@@ -1,11 +1,22 @@
-#!/bin/bash
+#!/usr/bin/env bash
 
 set -euo pipefail
 
 export OPENSSL_NO_VENDOR=1
+export CARGO_HOME="${CARGO_HOME:-$HOME/.local/share/cargo}"
+export RUSTUP_HOME="${RUSTUP_HOME:-$HOME/.local/share/rustup}"
+export PATH="$CARGO_HOME/bin:$PATH"
 
 RUSTUP_BINARY="$HOME/.local/bin/rustup"
-RUSTUP_URL="https://static.rust-lang.org/rustup/dist/x86_64-unknown-linux-gnu/rustup-init"
+
+case "$(uname -s)-$(uname -m)" in
+    Linux-x86_64)  RUSTUP_PLATFORM="x86_64-unknown-linux-gnu" ;;
+    Darwin-arm64)  RUSTUP_PLATFORM="aarch64-apple-darwin" ;;
+    Darwin-x86_64) RUSTUP_PLATFORM="x86_64-apple-darwin" ;;
+    *) echo "Unsupported platform: $(uname -s)-$(uname -m)" >&2; exit 1 ;;
+esac
+
+RUSTUP_URL="https://static.rust-lang.org/rustup/dist/${RUSTUP_PLATFORM}/rustup-init"
 
 tools=(
     cargo-leptos
@@ -45,7 +56,7 @@ chmod +x "$RUSTUP_BINARY"
 "$RUSTUP_BINARY" component add rust-analyzer
 
 if ! command -v cargo &>/dev/null; then
-    echo "cargo not found on PATH; ensure $HOME/.cargo/bin is in PATH" >&2
+    echo "cargo not found on PATH; ensure $CARGO_HOME/bin is in PATH" >&2
     exit 1
 fi
 
