@@ -39,5 +39,9 @@
   },
   "spinnerTipsEnabled": false,
   "effortLevel": "medium",
-  "prefersReducedMotio": true
+  "prefersReducedMotio": true,
+  "statusLine": {
+    "type": "command",
+    "command": "bash ~/.claude/statusline-command.sh"
+  }
 }

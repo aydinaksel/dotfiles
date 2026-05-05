@@ -4,6 +4,7 @@ general.import = [
   # "~/.config/alacritty/themes/catppuccin-frappe.toml",
    "~/.config/alacritty/themes/catppuccin-macchiato.toml",
   # "~/.config/alacritty/themes/catppuccin-mocha.toml",
+  "~/.config/alacritty/local.toml",
 ]
 
 [env]
@@ -31,7 +32,6 @@ style = { shape = "Block", blinking = "On" }
 unfocused_hollow = true
 
 [terminal]
-shell = { program = "/home/aydin/.local/share/cargo/bin/nu" }
 
 [selection]
 save_to_clipboard = true

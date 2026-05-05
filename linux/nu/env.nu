@@ -6,7 +6,7 @@ $env.XDG_CONFIG_HOME = $"($env.HOME)/.config"
 $env.XDG_STATE_HOME = $"($env.HOME)/.local/state"
 $env.XDG_CACHE_HOME = $"($env.HOME)/.cache"
 
-$env.EDITOR = "/usr/bin/nvim"
+$env.EDITOR = "nvim"
 
 $env.AWS_CONFIG_FILE = $"($env.XDG_CONFIG_HOME)/aws/config"
 $env.AWS_SHARED_CREDENTIALS_FILE = $"($env.XDG_CONFIG_HOME)/aws/credentials"
@@ -40,6 +40,9 @@ $env.PATH = (
         $"($env.CARGO_HOME)/bin"
         $"($env.GOPATH)/bin"
         $"($env.NPMPATH)/bin"
+        "/opt/homebrew/bin"
+        "/opt/homebrew/sbin"
+        "/usr/local/bin"
     ]
     | uniq
 )
