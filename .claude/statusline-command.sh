@@ -3,6 +3,10 @@
 input=$(cat)
 
 model_name=$(echo "$input" | jq -r '.model.display_name // "Unknown"' | sed 's/ ([^)]*context)//g')
+thinking_enabled=$(echo "$input" | jq -r '.thinking.enabled // false')
+effort_level=$(echo "$input" | jq -r '.effort.level // empty')
+five_hour_used=$(echo "$input" | jq -r '.rate_limits.five_hour.used_percentage // empty')
+seven_day_used=$(echo "$input" | jq -r '.rate_limits.seven_day.used_percentage // empty')
 current_dir=$(echo "$input" | jq -r '.workspace.current_dir // ""')
 pct=$(echo "$input" | jq -r '.context_window.used_percentage // 0')
 ctx_size=$(echo "$input" | jq -r '.context_window.context_window_size // 1000000')
@@ -51,6 +55,33 @@ sep="\033[2m | \033[0m"
 out="${token_color}${token_str}\033[0m"
 out+="${sep}\033[1;36m${dir}\033[0m"
 [ -n "$git_info" ] && out+="${sep}${git_info}"
-out+="${sep}\033[36m${model_name}\033[0m"
+model_display="${model_name}"
+if [ -n "$effort_level" ]; then
+  capitalized="$(echo "${effort_level:0:1}" | tr '[:lower:]' '[:upper:]')${effort_level:1}"
+  model_display="${model_name} on ${capitalized}"
+fi
+out+="${sep}\033[36m${model_display}\033[0m"
+
+rate_limit_color() {
+  local used=$1
+  local remaining=$(printf '%.0f' "$(echo "100 - $used" | bc -l)")
+  if [ "$remaining" -le 20 ]; then
+    printf '\033[31m%s%%\033[0m' "$remaining"
+  elif [ "$remaining" -le 50 ]; then
+    printf '\033[33m%s%%\033[0m' "$remaining"
+  else
+    printf '\033[32m%s%%\033[0m' "$remaining"
+  fi
+}
+
+if [ -n "$five_hour_used" ] || [ -n "$seven_day_used" ]; then
+  limits=""
+  [ -n "$five_hour_used" ] && limits+="5h: $(rate_limit_color "$five_hour_used")"
+  if [ -n "$seven_day_used" ]; then
+    [ -n "$limits" ] && limits+=" "
+    limits+="7d: $(rate_limit_color "$seven_day_used")"
+  fi
+  out+="${sep}${limits}"
+fi
 
 printf '%b' "$out"
