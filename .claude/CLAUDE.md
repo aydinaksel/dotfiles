@@ -44,3 +44,28 @@ If you need more than 3 levels of indentation, you're screwed anyway, and you sh
 # Prettify
 
 - Follow the [Google Markdown style guide](https://google.github.io/styleguide/docguide/style.html) when editing this and other Markdown files.
+
+# Leptos (Rust)
+
+Leptos 0.7+ (Tachys renderer) types views as deeply nested tuples like
+`HtmlElement<Div, Attrs, (Child1, Child2, ...)>` so rendering can be
+zero-cost. The flip side is that nontrivial view trees blow rustc's
+default `recursion_limit` and query depth limit (both 128) during release
+monomorphization, even when `cargo check` passes. The fix is `AnyView`
+type erasure via `.into_any()`, not bumping `recursion_limit`.
+
+- Every `#[component]` whose body contains a `<For>`, conditional
+  `move || if/else`, deeply nested children, or more than a couple of
+  child elements should end with `.into_any()` so the parent only sees
+  `AnyView`. Leaf components with one or two simple elements do not
+  need it.
+- Each arm of a conditional `move || if/else` (or `match`) that
+  produces different concrete view types must call `.into_any()` per
+  arm. The compiler error here is usually obvious; the release-build
+  query-depth blow-up is not.
+- Do not raise `recursion_limit` as the primary fix. It just delays the
+  next blow-up as the view tree grows. Treat any temptation to raise it
+  as a signal to add `.into_any()` at the right component boundary.
+- The runtime cost of `AnyView` is one boxed `dyn` per erasure, which
+  is negligible in practice and is the intended escape hatch per the
+  Leptos book.

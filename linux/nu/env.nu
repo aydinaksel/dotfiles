@@ -51,3 +51,7 @@ $env.PATH = (
 let starship_cache = $"($env.XDG_CACHE_HOME)/starship/init.nu"
 mkdir ($starship_cache | path dirname)
 ^starship init nu | save --force $starship_cache
+
+# Point at the persistent user-level ssh-agent (~/.config/systemd/user/ssh-agent.service)
+# so Zellij panes don't end up with a stale SSH_AUTH_SOCK after reconnecting via SSH.
+$env.SSH_AUTH_SOCK = $"($env.XDG_RUNTIME_DIR? | default $'/run/user/(id -u | str trim)')/ssh-agent.socket"
