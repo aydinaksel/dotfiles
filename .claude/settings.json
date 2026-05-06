@@ -8,11 +8,16 @@
       "Read(~/*)",
       "Bash(git -C * status)",
       "Bash(git -C * diff)",
+      "Bash(git -C * diff --stat)",
       "Bash(git add *)",
       "Bash(git commit -m ' *)",
       "Bash(gh search *)",
+      "Bash(gh pr list *)",
+      "Bash(gh pr diff *)",
       "Bash(cargo check *)",
       "Bash(cargo search:*)",
+      "Bash(cargo clippy *)",
+      "Bash(cargo build *)",
       "Bash(docker exec postgres psql -U admin -d demeter -c \"SELECT *)",
       "Bash(docker exec postgres psql -U admin -d demeter -c 'SELECT *)",
       "WebSearch",
@@ -37,11 +42,25 @@
       "Bash(curl *)"
     ]
   },
-  "spinnerTipsEnabled": false,
-  "effortLevel": "medium",
-  "prefersReducedMotio": true,
+  "model": "opus-4-6",
   "statusLine": {
     "type": "command",
     "command": "bash ~/.claude/statusline-command.sh"
+  },
+  "spinnerTipsEnabled": false,
+  "effortLevel": "medium",
+  "prefersReducedMotio": true,
+  "servers": {
+    "Salesforce DX": {
+      "command": "npx",
+      "args": [
+        "-y",
+        "@salesforce/mcp@latest",
+        "--orgs",
+        "aydin.aksel@plumguide.com",
+        "--toolsets",
+        "lwc-experts"
+      ]
+    }
   }
 }
