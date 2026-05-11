@@ -15,9 +15,13 @@ context_used=$(echo "$input" | jq '[.context_window.current_usage.input_tokens, 
 fmt_tok() {
   local n=$1
   if [ "$n" -ge 1000000 ]; then
-    printf '%.1fM' "$(echo "$n / 1000000" | bc -l)"
+    local whole=$((n / 1000000))
+    local frac=$(( (n % 1000000) / 100000 ))
+    printf '%d.%dM' "$whole" "$frac"
   elif [ "$n" -ge 1000 ]; then
-    printf '%.1fk' "$(echo "$n / 1000" | bc -l)"
+    local whole=$((n / 1000))
+    local frac=$(( (n % 1000) / 100 ))
+    printf '%d.%dk' "$whole" "$frac"
   else
     printf '%d' "$n"
   fi
@@ -64,7 +68,7 @@ out+="${sep}\033[36m${model_display}\033[0m"
 
 rate_limit_color() {
   local used=$1
-  local remaining=$(printf '%.0f' "$(echo "100 - $used" | bc -l)")
+  local remaining=$((100 - used))
   if [ "$remaining" -le 20 ]; then
     printf '\033[31m%s%%\033[0m' "$remaining"
   elif [ "$remaining" -le 50 ]; then
