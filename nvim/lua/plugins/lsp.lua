@@ -22,7 +22,49 @@ return {
         ruff = {},
         lua_ls = {},
         quick_lint_js = {},
-        rust_analyzer = {},
+        rust_analyzer = {
+          settings = {
+            ["rust-analyzer"] = {
+              imports = {
+                granularity = { group = "module" },
+                prefix = "self",
+              },
+              cargo = {
+                buildScripts = { enable = true },
+              },
+              procMacro = { enable = true },
+              inlayHints = {
+                typeHints = { enable = true },
+                parameterHints = { enable = true },
+                chainingHints = { enable = true },
+                closureReturnTypeHints = { enable = "always" },
+              },
+              hover = {
+                actions = { enable = true },
+                documentation = {
+                  enable = true,
+                  keywords = { enable = true },
+                },
+              },
+              lens = {
+                enable = true,
+                references = {
+                  adt = { enable = true },
+                  method = { enable = true },
+                },
+              },
+              completion = {
+                fullFunctionSignatures = { enable = true },
+              },
+              diagnostics = {
+                experimental = { enable = true },
+              },
+              semanticHighlighting = {
+                punctuation = { enable = true },
+              },
+            },
+          },
+        },
         nil_ls = {
           settings = {
             ["nil"] = {
@@ -60,6 +102,10 @@ return {
         callback = function(args)
           local client = vim.lsp.get_client_by_id(args.data.client_id)
           if not client then return end
+
+          if client:supports_method("textDocument/inlayHint") then
+            vim.lsp.inlay_hint.enable(true, { bufnr = args.buf })
+          end
 
           vim.api.nvim_create_autocmd("BufWritePre", {
             buffer = args.buf,
