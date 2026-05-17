@@ -36,7 +36,9 @@
     "deny": [
       "Read(./.env)",
       "Read(./.env.*)",
-      "Read(./secrets/**)"
+      "Read(~/.secrets/*)",
+      "Bash(cat ~/.secrets/*)",
+      "Bash(cat /home/aydin/.secrets/*)"
     ],
     "ask": [
       "Bash(curl *)"
@@ -48,7 +50,7 @@
     "command": "bash ~/.claude/statusline-command.sh"
   },
   "spinnerTipsEnabled": false,
-  "effortLevel": "medium",
+  "effortLevel": "high",
   "prefersReducedMotio": true,
   "servers": {
     "Salesforce DX": {

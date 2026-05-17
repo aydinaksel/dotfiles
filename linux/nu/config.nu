@@ -47,4 +47,12 @@ alias nvimconfig = cd ~/.config/nvim
 alias ll = ls -la
 alias la = ls -a
 
+def bws-fbr [...arguments: string] {
+    with-env { BWS_ACCESS_TOKEN: (open ~/.secrets/bws-token-fbr | str trim) } { bws ...$arguments }
+}
+
+def bws-chichek [...arguments: string] {
+    with-env { BWS_ACCESS_TOKEN: (open ~/.secrets/bws-token-chichek | str trim) } { bws ...$arguments }
+}
+
 source ~/.cache/starship/init.nu

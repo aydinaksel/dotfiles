@@ -1,3 +1,5 @@
+@conventions/rust-structured-logging.md
+
 # Naming Conventions
 
 1. Don't name things with a single letter.
