@@ -1,5 +1,11 @@
 @conventions/rust-structured-logging.md
 
+# Dotfiles
+
+Config files under `~/.config/` and `~/.claude/` are symlinks into `~/Projects/dotfiles/`.
+When editing these files, resolve symlinks first with `readlink -f` and use the real path.
+The Edit tool refuses to write through symlinks.
+
 # Naming Conventions
 
 1. Don't name things with a single letter.

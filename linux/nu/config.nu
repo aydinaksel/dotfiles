@@ -51,6 +51,7 @@ def tailscale-switch [] {
     } else {
         sudo tailscale switch vpn.fbrmarble.com
     }
+    sudo systemctl restart tailscaled
 }
 
 alias nvimconfig = cd ~/.config/nvim
