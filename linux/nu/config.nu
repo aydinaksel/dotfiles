@@ -43,6 +43,16 @@ def paste [] {
     error make { msg: "paste not supported over OSC 52 (write-only)" }
   }
 }
+def tailscale-switch [] {
+    let status = (tailscale status --json | from json)
+    let current = $status.CurrentTailnet.Name
+    if $current == "vpn.fbrmarble.com" {
+        sudo tailscale switch Chichek
+    } else {
+        sudo tailscale switch vpn.fbrmarble.com
+    }
+}
+
 alias nvimconfig = cd ~/.config/nvim
 alias ll = ls -la
 alias la = ls -a
