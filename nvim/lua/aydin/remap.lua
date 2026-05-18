@@ -4,15 +4,16 @@ vim.g.maplocalleader = " "
 vim.keymap.set("t", "<esc><esc>", "<C-\\><C-N>")
 
 if os.getenv("SSH_TTY") or os.getenv("SSH_CONNECTION") then
+  local osc52 = require('vim.ui.clipboard.osc52')
   vim.g.clipboard = {
     name = 'OSC 52',
     copy = {
-      ['+'] = require('vim.ui.clipboard.osc52').copy('+'),
-      ['*'] = require('vim.ui.clipboard.osc52').copy('*'),
+      ['+'] = osc52.copy('+'),
+      ['*'] = osc52.copy('*'),
     },
     paste = {
-      ['+'] = require('vim.ui.clipboard.osc52').paste('+'),
-      ['*'] = require('vim.ui.clipboard.osc52').paste('*'),
+      ['+'] = function() return vim.fn.getreg('+', true, true) end,
+      ['*'] = function() return vim.fn.getreg('*', true, true) end,
     },
   }
 end
