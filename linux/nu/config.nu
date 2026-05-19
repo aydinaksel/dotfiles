@@ -67,6 +67,16 @@ def bws-chichek [...arguments: string] {
     with-env { BWS_ACCESS_TOKEN: (open ~/.secrets/bws-token-chichek | str trim) } { bws ...$arguments }
 }
 
+$env.config.hooks.env_change.PWD = [
+    {|before, after|
+        let venv_path = ($after | path join venv)
+        if ($venv_path | path exists) {
+            $env.VIRTUAL_ENV = $venv_path
+            $env.PATH = ($venv_path | path join bin | prepend $env.PATH)
+        }
+    }
+]
+
 source ~/.cache/starship/init.nu
 
 $env.config.hooks.pre_prompt = ($env.config.hooks.pre_prompt | default [] | append { ||
