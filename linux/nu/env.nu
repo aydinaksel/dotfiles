@@ -21,7 +21,6 @@ $env.GNUPGHOME = $"($env.XDG_DATA_HOME)/gnupg"
 
 $env.NPM_CONFIG_INIT_MODULE = $"($env.XDG_CONFIG_HOME)/npm/config/npm-init.js"
 $env.NPM_CONFIG_CACHE = $"($env.XDG_CACHE_HOME)/npm"
-$env.NPM_CONFIG_TMP = $"($env.XDG_RUNTIME_DIR? | default '/tmp')/npm"
 
 $env.CLAUDE_CODE_QUIET_STARTUP = "1"
 
@@ -30,6 +29,8 @@ $env.PYTHON_HISTORY = $"($env.XDG_STATE_HOME)/python/history"
 $env._JAVA_OPTIONS = $"-Djava.util.prefs.userRoot=($env.XDG_CONFIG_HOME)/java"
 
 $env.SF_DISABLE_TELEMETRY = "true"
+
+$env.NTN_INSTALL_DIR = $"($env.HOME)/.local/bin"
 
 $env.PATH = (
     $env.PATH

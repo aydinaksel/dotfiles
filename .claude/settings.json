@@ -50,8 +50,6 @@
     "command": "bash ~/.claude/statusline-command.sh"
   },
   "spinnerTipsEnabled": false,
-  "effortLevel": "high",
-  "prefersReducedMotio": true,
   "servers": {
     "Salesforce DX": {
       "command": "npx",
@@ -64,5 +62,8 @@
         "lwc-experts"
       ]
     }
-  }
+  },
+  "effortLevel": "medium",
+  "remoteControlAtStartup": false,
+  "prefersReducedMotio": true
 }
