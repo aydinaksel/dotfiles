@@ -4,7 +4,7 @@
   inputs = {
     nixpkgs.url = "https://flakehub.com/f/NixOS/nixpkgs/0.1";
     home-manager = {
-      url = "github:nix-community/home-manager";
+      url = "https://flakehub.com/f/nix-community/home-manager/0.1";
       inputs.nixpkgs.follows = "nixpkgs";
     };
   };
@@ -27,14 +27,22 @@
             };
 
             home.packages = with nixpkgs.legacyPackages.x86_64-linux; [
+              bat
+              dust
+              gitui
+              just
+              mdbook
+              neovim
               nil
               nixfmt
+              nushell
+              qrrs
               ripgrep
+              rustlings
               starship
               tree-sitter
-              neovim
-              gitui
-              nushell
+              xh
+              zellij
             ];
           }
         ];
