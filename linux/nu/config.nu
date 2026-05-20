@@ -51,6 +51,7 @@ def tailscale-switch [] {
     } else {
         sudo tailscale switch vpn.fbrmarble.com
     }
+    sleep 3sec
     sudo systemctl restart tailscaled
 }
 
