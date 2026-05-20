@@ -68,3 +68,8 @@ def bws-chichek [...arguments: string] {
 }
 
 source ~/.cache/starship/init.nu
+
+$env.config.hooks.pre_prompt = ($env.config.hooks.pre_prompt | default [] | append { ||
+    if (which direnv | is-empty) { return }
+    direnv export json | from json -s | default {} | load-env
+})
