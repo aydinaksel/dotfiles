@@ -41,6 +41,8 @@ $env.PATH = (
         $"($env.CARGO_HOME)/bin"
         $"($env.GOPATH)/bin"
         $"($env.NPMPATH)/bin"
+        $"($env.HOME)/.nix-profile/bin"
+        "/nix/var/nix/profiles/default/bin"
         "/opt/homebrew/bin"
         "/opt/homebrew/sbin"
         "/usr/local/bin"
