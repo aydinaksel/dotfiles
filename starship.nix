@@ -1,8 +1,14 @@
 {
   add_newline = true;
+  command_timeout = 2000;
   continuation_prompt = "[▸▹ ](dimmed white)";
 
-  format = "($nix_shell$container$fill\n)$directory$git_branch$git_commit$git_state$git_status$memory_usage$custom$status$os$time\n$cmd_duration$username$hostname$shlvl$shell$env_var$character";
+  format = builtins.concatStringsSep "" [
+    "($nix_shell$container$fill\n)"
+    "$directory $time\n"
+    "($git_branch$git_commit$git_state$git_status\n)"
+    "$cmd_duration$username$hostname$shlvl$shell$env_var$character"
+  ];
 
   nix_shell.format = "[❄ $name](bold italic bright-cyan)";
 
@@ -55,37 +61,30 @@
     };
   };
 
-  cmd_duration.format = "[command lasted $duration ](italic white)";
+  cmd_duration = {
+    format = "[took $duration ](italic dimmed yellow)";
+    min_time = 2000;
+  };
 
   time = {
     disabled = false;
-    format = " [$time](italic dimmed white)";
+    format = "[$time](italic dimmed white)";
     time_format = "%R";
     utc_time_offset = "local";
   };
 
   git_branch = {
-    format = " [ $symbol $branch ](fg:#769ff0 bg:#394260)";
+    format = "[$symbol $branch ](fg:#769ff0)";
     symbol = "";
     truncation_symbol = "...";
-    ignore_branches = [
-      "main"
-      "master"
-    ];
     only_attached = true;
   };
 
-  git_metrics = {
-    format = "([+$added]($added_style))([-$deleted]($deleted_style))";
-    added_style = "italic dimmed green";
-    deleted_style = "italic dimmed red";
-    ignore_submodules = true;
-    disabled = false;
-  };
+  git_metrics.disabled = true;
 
   git_status = {
     style = "bold italic bright-blue";
-    format = "([ $ahead_behind$staged$modified$untracked$renamed$deleted$conflicted$stashed]($style))";
+    format = "( $ahead_behind$staged$modified$untracked$renamed$deleted$conflicted$stashed)";
     conflicted = "[conflicted \${count}](italic bright-magenta) ";
     ahead = "[ahead \${count}](italic green) ";
     behind = "[behind \${count}](italic red) ";
@@ -96,6 +95,7 @@
     staged = "[staged \${count}](italic bright-cyan) ";
     renamed = "[renamed \${count}](italic bright-blue) ";
     deleted = "[deleted \${count}](italic red) ";
+    ignore_submodules = true;
   };
 
   bun.format = "via [$symbol]($style)";
