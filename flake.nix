@@ -11,9 +11,22 @@
 
   outputs =
     { nixpkgs, home-manager, ... }:
+    let
+      unfreePackages = [ "claude-code" ];
+      allowUnfree =
+        package: builtins.elem (package.pname or (builtins.parseDrvName package.name).name) unfreePackages;
+      linuxPkgs = import nixpkgs {
+        system = "x86_64-linux";
+        config.allowUnfreePredicate = allowUnfree;
+      };
+      darwinPkgs = import nixpkgs {
+        system = "aarch64-darwin";
+        config.allowUnfreePredicate = allowUnfree;
+      };
+    in
     {
-      homeConfigurations."zeus" = home-manager.lib.homeManagerConfiguration {
-        pkgs = nixpkgs.legacyPackages.x86_64-linux;
+      homeConfigurations."aydin@zeus" = home-manager.lib.homeManagerConfiguration {
+        pkgs = linuxPkgs;
         modules = [
           {
             home.username = "aydin";
@@ -25,9 +38,164 @@
               enable = true;
               nix-direnv.enable = true;
             };
+            programs.git = {
+              enable = true;
+              settings = {
+                user.name = "Aydin Aksel";
+                user.email = "154738769+aydinaksel@users.noreply.github.com";
+                core.editor = "nvim";
+                init.defaultBranch = "main";
+                color.ui = "auto";
+                push.autoSetupRemote = true;
+              };
+            };
+            programs.starship = {
+              enable = true;
+              settings = import ./starship.nix;
+            };
+            programs.nushell = {
+              enable = true;
+              settings = {
+                show_banner = false;
+                edit_mode = "emacs";
+                history = {
+                  max_size = 100000;
+                  sync_on_enter = true;
+                  file_format = "plaintext";
+                  isolation = false;
+                };
+                completions = {
+                  case_sensitive = false;
+                  quick = true;
+                  partial = true;
+                  algorithm = "fuzzy";
+                };
+                cursor_shape.emacs = "line";
+              };
+              shellAliases = {
+                upgrade = "sudo dnf upgrade";
+                untar = "tar xvf";
+                bye = "shutdown now";
+                nvimconfig = "cd ~/.config/nvim";
+                ll = "ls -la";
+                la = "ls -a";
+              };
+              extraEnv = ''
+                $env.XDG_DATA_HOME = $"($env.HOME)/.local/share"
+                $env.XDG_CONFIG_HOME = $"($env.HOME)/.config"
+                $env.XDG_STATE_HOME = $"($env.HOME)/.local/state"
+                $env.XDG_CACHE_HOME = $"($env.HOME)/.cache"
 
-            home.packages = with nixpkgs.legacyPackages.x86_64-linux; [
+                $env.EDITOR = "nvim"
+
+                $env.AWS_CONFIG_FILE = $"($env.XDG_CONFIG_HOME)/aws/config"
+                $env.AWS_SHARED_CREDENTIALS_FILE = $"($env.XDG_CONFIG_HOME)/aws/credentials"
+
+                $env.CARGO_HOME = $"($env.XDG_DATA_HOME)/cargo"
+                $env.RUSTUP_HOME = $"($env.XDG_DATA_HOME)/rustup"
+                $env.GOPATH = $"($env.XDG_DATA_HOME)/go"
+                $env.NPMPATH = $"($env.HOME)/.local/lib/npm-global"
+
+                $env.DOCKER_CONFIG = $"($env.XDG_CONFIG_HOME)/docker"
+                $env.GNUPGHOME = $"($env.XDG_DATA_HOME)/gnupg"
+
+                $env.NPM_CONFIG_INIT_MODULE = $"($env.XDG_CONFIG_HOME)/npm/config/npm-init.js"
+                $env.NPM_CONFIG_CACHE = $"($env.XDG_CACHE_HOME)/npm"
+
+                $env.CLAUDE_CODE_QUIET_STARTUP = "1"
+
+                $env.PYTHON_HISTORY = $"($env.XDG_STATE_HOME)/python/history"
+
+                $env._JAVA_OPTIONS = $"-Djava.util.prefs.userRoot=($env.XDG_CONFIG_HOME)/java"
+
+                $env.SF_DISABLE_TELEMETRY = "true"
+
+                $env.NTN_INSTALL_DIR = $"($env.HOME)/.local/bin"
+
+                $env.PATH = (
+                    $env.PATH
+                    | split row (char esep)
+                    | prepend [
+                        $"($env.HOME)/bin"
+                        $"($env.HOME)/.local/bin"
+                        $"($env.CARGO_HOME)/bin"
+                        $"($env.GOPATH)/bin"
+                        $"($env.NPMPATH)/bin"
+                        $"($env.HOME)/.nix-profile/bin"
+                        "/nix/var/nix/profiles/default/bin"
+                        "/opt/homebrew/bin"
+                        "/opt/homebrew/sbin"
+                        "/usr/local/bin"
+                    ]
+                    | uniq
+                )
+
+                $env.SSH_AUTH_SOCK = $"($env.XDG_RUNTIME_DIR? | default $'/run/user/(id -u | str trim)')/ssh-agent.socket"
+                $env.GIT_SSH_COMMAND = "ssh"
+
+                $env.DIRENV_LOG_FORMAT = ""
+              '';
+              extraConfig = ''
+                def copy [] {
+                  if ($env.WAYLAND_DISPLAY? | is-not-empty) {
+                    $in | wl-copy
+                  } else if ($env.DISPLAY? | is-not-empty) {
+                    $in | xclip -selection clipboard
+                  } else {
+                    let encoded = ($in | encode base64)
+                    print -n $"\e]52;c;($encoded)\a"
+                  }
+                }
+
+                def paste [] {
+                  if ($env.WAYLAND_DISPLAY? | is-not-empty) {
+                    wl-paste
+                  } else if ($env.DISPLAY? | is-not-empty) {
+                    xclip -selection clipboard -o
+                  } else {
+                    error make { msg: "paste not supported over OSC 52 (write-only)" }
+                  }
+                }
+
+                def tailscale-switch [] {
+                    let status = (tailscale status --json | from json)
+                    let current = $status.CurrentTailnet.Name
+                    if $current == "vpn.fbrmarble.com" {
+                        sudo tailscale switch Chichek
+                    } else {
+                        sudo tailscale switch vpn.fbrmarble.com
+                    }
+                    sleep 3sec
+                    sudo systemctl restart tailscaled
+                }
+
+                def bws-fbr [...arguments: string] {
+                    with-env { BWS_ACCESS_TOKEN: (open ~/.secrets/bws-token-fbr | str trim) } { bws ...$arguments }
+                }
+
+                def bws-chichek [...arguments: string] {
+                    with-env { BWS_ACCESS_TOKEN: (open ~/.secrets/bws-token-chichek | str trim) } { bws ...$arguments }
+                }
+
+                $env.config.hooks.pre_prompt = ($env.config.hooks.pre_prompt | default [] | append { ||
+                    if (which direnv | is-empty) { return }
+                    direnv export json | from json -s | default {} | load-env
+                })
+              '';
+            };
+            programs.zellij = {
+              enable = true;
+              extraConfig = builtins.readFile ./linux/zellij/config.kdl;
+            };
+
+            xdg.configFile = {
+              "nushell/autoload/claude-prune-projects.nu".source = ./linux/nu/autoload/claude-prune-projects.nu;
+              "nushell/autoload/claude-reset.nu".source = ./linux/nu/autoload/claude-reset.nu;
+            };
+
+            home.packages = with linuxPkgs; [
               bat
+              claude-code
               dust
               gitui
               just
@@ -35,21 +203,18 @@
               neovim
               nil
               nixfmt
-              nushell
               qrrs
               ripgrep
               rustlings
-              starship
               tree-sitter
               xh
-              zellij
             ];
           }
         ];
       };
 
-      homeConfigurations."hades" = home-manager.lib.homeManagerConfiguration {
-        pkgs = nixpkgs.legacyPackages.x86_64-linux;
+      homeConfigurations."aydin@hades" = home-manager.lib.homeManagerConfiguration {
+        pkgs = linuxPkgs;
         modules = [
           {
             home.username = "aydin";
@@ -61,22 +226,176 @@
               enable = true;
               nix-direnv.enable = true;
             };
+            programs.git = {
+              enable = true;
+              settings = {
+                user.name = "Aydin Aksel";
+                user.email = "154738769+aydinaksel@users.noreply.github.com";
+                core.editor = "nvim";
+                init.defaultBranch = "main";
+                color.ui = "auto";
+                push.autoSetupRemote = true;
+              };
+            };
+            programs.starship = {
+              enable = true;
+              settings = import ./starship.nix;
+            };
+            programs.nushell = {
+              enable = true;
+              settings = {
+                show_banner = false;
+                edit_mode = "emacs";
+                history = {
+                  max_size = 100000;
+                  sync_on_enter = true;
+                  file_format = "plaintext";
+                  isolation = false;
+                };
+                completions = {
+                  case_sensitive = false;
+                  quick = true;
+                  partial = true;
+                  algorithm = "fuzzy";
+                };
+                cursor_shape.emacs = "line";
+              };
+              shellAliases = {
+                upgrade = "sudo dnf upgrade";
+                untar = "tar xvf";
+                bye = "shutdown now";
+                nvimconfig = "cd ~/.config/nvim";
+                ll = "ls -la";
+                la = "ls -a";
+              };
+              extraEnv = ''
+                $env.XDG_DATA_HOME = $"($env.HOME)/.local/share"
+                $env.XDG_CONFIG_HOME = $"($env.HOME)/.config"
+                $env.XDG_STATE_HOME = $"($env.HOME)/.local/state"
+                $env.XDG_CACHE_HOME = $"($env.HOME)/.cache"
 
-            home.packages = with nixpkgs.legacyPackages.x86_64-linux; [
+                $env.EDITOR = "nvim"
+
+                $env.AWS_CONFIG_FILE = $"($env.XDG_CONFIG_HOME)/aws/config"
+                $env.AWS_SHARED_CREDENTIALS_FILE = $"($env.XDG_CONFIG_HOME)/aws/credentials"
+
+                $env.CARGO_HOME = $"($env.XDG_DATA_HOME)/cargo"
+                $env.RUSTUP_HOME = $"($env.XDG_DATA_HOME)/rustup"
+                $env.GOPATH = $"($env.XDG_DATA_HOME)/go"
+                $env.NPMPATH = $"($env.HOME)/.local/lib/npm-global"
+
+                $env.DOCKER_CONFIG = $"($env.XDG_CONFIG_HOME)/docker"
+                $env.GNUPGHOME = $"($env.XDG_DATA_HOME)/gnupg"
+
+                $env.NPM_CONFIG_INIT_MODULE = $"($env.XDG_CONFIG_HOME)/npm/config/npm-init.js"
+                $env.NPM_CONFIG_CACHE = $"($env.XDG_CACHE_HOME)/npm"
+
+                $env.CLAUDE_CODE_QUIET_STARTUP = "1"
+
+                $env.PYTHON_HISTORY = $"($env.XDG_STATE_HOME)/python/history"
+
+                $env._JAVA_OPTIONS = $"-Djava.util.prefs.userRoot=($env.XDG_CONFIG_HOME)/java"
+
+                $env.SF_DISABLE_TELEMETRY = "true"
+
+                $env.NTN_INSTALL_DIR = $"($env.HOME)/.local/bin"
+
+                $env.PATH = (
+                    $env.PATH
+                    | split row (char esep)
+                    | prepend [
+                        $"($env.HOME)/bin"
+                        $"($env.HOME)/.local/bin"
+                        $"($env.CARGO_HOME)/bin"
+                        $"($env.GOPATH)/bin"
+                        $"($env.NPMPATH)/bin"
+                        $"($env.HOME)/.nix-profile/bin"
+                        "/nix/var/nix/profiles/default/bin"
+                        "/opt/homebrew/bin"
+                        "/opt/homebrew/sbin"
+                        "/usr/local/bin"
+                    ]
+                    | uniq
+                )
+
+                $env.SSH_AUTH_SOCK = $"($env.XDG_RUNTIME_DIR? | default $'/run/user/(id -u | str trim)')/ssh-agent.socket"
+                $env.GIT_SSH_COMMAND = "ssh"
+
+                $env.DIRENV_LOG_FORMAT = ""
+              '';
+              extraConfig = ''
+                def copy [] {
+                  if ($env.WAYLAND_DISPLAY? | is-not-empty) {
+                    $in | wl-copy
+                  } else if ($env.DISPLAY? | is-not-empty) {
+                    $in | xclip -selection clipboard
+                  } else {
+                    let encoded = ($in | encode base64)
+                    print -n $"\e]52;c;($encoded)\a"
+                  }
+                }
+
+                def paste [] {
+                  if ($env.WAYLAND_DISPLAY? | is-not-empty) {
+                    wl-paste
+                  } else if ($env.DISPLAY? | is-not-empty) {
+                    xclip -selection clipboard -o
+                  } else {
+                    error make { msg: "paste not supported over OSC 52 (write-only)" }
+                  }
+                }
+
+                def tailscale-switch [] {
+                    let status = (tailscale status --json | from json)
+                    let current = $status.CurrentTailnet.Name
+                    if $current == "vpn.fbrmarble.com" {
+                        sudo tailscale switch Chichek
+                    } else {
+                        sudo tailscale switch vpn.fbrmarble.com
+                    }
+                    sleep 3sec
+                    sudo systemctl restart tailscaled
+                }
+
+                def bws-fbr [...arguments: string] {
+                    with-env { BWS_ACCESS_TOKEN: (open ~/.secrets/bws-token-fbr | str trim) } { bws ...$arguments }
+                }
+
+                def bws-chichek [...arguments: string] {
+                    with-env { BWS_ACCESS_TOKEN: (open ~/.secrets/bws-token-chichek | str trim) } { bws ...$arguments }
+                }
+
+                $env.config.hooks.pre_prompt = ($env.config.hooks.pre_prompt | default [] | append { ||
+                    if (which direnv | is-empty) { return }
+                    direnv export json | from json -s | default {} | load-env
+                })
+              '';
+            };
+            programs.zellij = {
+              enable = true;
+              extraConfig = builtins.readFile ./linux/zellij/config.kdl;
+            };
+
+            xdg.configFile = {
+              "nushell/autoload/claude-prune-projects.nu".source = ./linux/nu/autoload/claude-prune-projects.nu;
+              "nushell/autoload/claude-reset.nu".source = ./linux/nu/autoload/claude-reset.nu;
+            };
+
+            home.packages = with linuxPkgs; [
+              claude-code
               mdbook
               nil
               nixfmt
               ripgrep
               snowflake-cli
-              starship
               tree-sitter
             ];
           }
         ];
       };
 
-      homeConfigurations."darwin" = home-manager.lib.homeManagerConfiguration {
-        pkgs = nixpkgs.legacyPackages.aarch64-darwin;
+      homeConfigurations."aydin@darwin" = home-manager.lib.homeManagerConfiguration {
+        pkgs = darwinPkgs;
         modules = [
           {
             home.username = "aydin";
@@ -88,12 +407,27 @@
               enable = true;
               nix-direnv.enable = true;
             };
+            programs.git = {
+              enable = true;
+              settings = {
+                user.name = "Aydin Aksel";
+                user.email = "154738769+aydinaksel@users.noreply.github.com";
+                core.editor = "nvim";
+                init.defaultBranch = "main";
+                color.ui = "auto";
+                push.autoSetupRemote = true;
+              };
+            };
+            programs.starship = {
+              enable = true;
+              settings = import ./starship.nix;
+            };
 
-            home.packages = with nixpkgs.legacyPackages.aarch64-darwin; [
+            home.packages = with darwinPkgs; [
+              claude-code
               nil
               nixfmt
               ripgrep
-              starship
               tree-sitter
             ];
           }

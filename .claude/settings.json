@@ -50,19 +50,7 @@
     "command": "bash ~/.claude/statusline-command.sh"
   },
   "spinnerTipsEnabled": false,
-  "servers": {
-    "Salesforce DX": {
-      "command": "npx",
-      "args": [
-        "-y",
-        "@salesforce/mcp@latest",
-        "--orgs",
-        "aydin.aksel@plumguide.com",
-        "--toolsets",
-        "lwc-experts"
-      ]
-    }
-  },
+  "servers": {},
   "effortLevel": "medium",
   "remoteControlAtStartup": false,
   "prefersReducedMotio": true

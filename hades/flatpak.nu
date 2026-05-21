@@ -25,6 +25,7 @@ let desired = [
     "com.github.hugolabe.Wike"
 
     # OTHER
+    "com.onepassword.OnePassword"
     "it.mijorus.whisper"
     "com.bitwarden.desktop"
     "com.fastmail.Fastmail"

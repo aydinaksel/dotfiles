@@ -46,4 +46,4 @@ export PATH="$HOME/bin:$HOME/.local/bin:$HOME/.local/share/cargo/bin/:$GOPATH/bi
 
 . "$HOME/.local/share/../bin/env"
 
-if [ -e /home/aydin/.nix-profile/etc/profile.d/nix.sh ]; then . /home/aydin/.nix-profile/etc/profile.d/nix.sh; fi # added by Nix installer
+if [ -e /nix/var/nix/profiles/default/etc/profile.d/nix.sh ]; then . /nix/var/nix/profiles/default/etc/profile.d/nix.sh; fi
