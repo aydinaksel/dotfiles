@@ -1,157 +1,212 @@
 {
-  add_newline = true;
-  command_timeout = 2000;
-  continuation_prompt = "[▸▹ ](dimmed white)";
-
-  format = builtins.concatStringsSep "" [
-    "($nix_shell$container$fill\n)"
-    "$directory $time\n"
-    "($git_branch$git_commit$git_state$git_status\n)"
-    "$cmd_duration$username$hostname$shlvl$shell$env_var$character"
-  ];
-
-  nix_shell.format = "[❄ $name](bold italic bright-cyan)";
-
-  fill.symbol = " ";
+  continuation_prompt = "[.](bright-black) ";
 
   character = {
-    format = "$symbol ";
-    success_symbol = "[⭘](bold italic bright-green)";
-    error_symbol = "[⭘](bold italic bright-red)";
-    vimcmd_symbol = "[■](italic dimmed green)";
-    vimcmd_replace_one_symbol = "◌";
-    vimcmd_replace_symbol = "□";
-    vimcmd_visual_symbol = "▼";
+    success_symbol = "[>](bold green)";
+    error_symbol = "[x](bold red)";
+    vimcmd_symbol = "[<](bold green)";
+    vimcmd_visual_symbol = "[<](bold yellow)";
+    vimcmd_replace_symbol = "[<](bold purple)";
+    vimcmd_replace_one_symbol = "[<](bold purple)";
   };
 
-  env_var.VIMSHELL.format = "[$env_value](green italic)";
-
-  sudo = {
-    disabled = false;
-    format = "[$symbol](bold italic bright-purple)";
-    symbol = "sudo ";
-  };
-
-  username = {
-    disabled = false;
-    show_always = true;
-    format = "[$user](bright-red bold italic)";
-  };
-
-  hostname = {
-    disabled = false;
-    ssh_only = false;
-    format = "[@$hostname](bright-yellow bold italic)[$ssh_symbol](bold red italic) ";
-    ssh_symbol = " ON SSH";
-  };
-
-  directory = {
-    home_symbol = "HOME";
-    truncation_length = 1;
-    truncate_to_repo = false;
-    read_only = " 󰌾";
-    use_os_path_sep = true;
-    style = "bold italic blue";
-    format = "[$path]($style)[$read_only]($read_only_style)";
-    substitutions = {
-      "HOME/Documents" = "DOCUMENTS";
-      "HOME/Downloads" = "DOWNLOADS";
-      "HOME/Music" = "MUSIC";
-      "HOME/Pictures" = "PICTURES";
-    };
-  };
-
-  cmd_duration = {
-    format = "[took $duration ](italic dimmed yellow)";
-    min_time = 2000;
-  };
-
-  time = {
-    disabled = false;
-    format = "[$time](italic dimmed white)";
-    time_format = "%R";
-    utc_time_offset = "local";
-  };
-
-  git_branch = {
-    format = "[$symbol $branch ](fg:#769ff0)";
-    symbol = "";
-    truncation_symbol = "...";
-    only_attached = true;
-  };
-
-  git_metrics.disabled = true;
+  git_commit.tag_symbol = " tag ";
 
   git_status = {
-    style = "bold italic bright-blue";
-    format = "( $ahead_behind$staged$modified$untracked$renamed$deleted$conflicted$stashed)";
-    conflicted = "[conflicted \${count}](italic bright-magenta) ";
-    ahead = "[ahead \${count}](italic green) ";
-    behind = "[behind \${count}](italic red) ";
-    diverged = "[diverged \${ahead_count} ↓\${behind_count}](italic bright-magenta) ";
-    untracked = "[untracked \${count}](italic bright-yellow) ";
-    stashed = "[stashed](italic white) ";
-    modified = "[modified \${count}](italic yellow) ";
-    staged = "[staged \${count}](italic bright-cyan) ";
-    renamed = "[renamed \${count}](italic bright-blue) ";
-    deleted = "[deleted \${count}](italic red) ";
-    ignore_submodules = true;
+    ahead = ">";
+    behind = "<";
+    diverged = "<>";
+    renamed = "r";
+    deleted = "x";
   };
 
-  bun.format = "via [$symbol]($style)";
-  buf.format = "with [$symbol]($style)";
-  c.format = "via [$symbol($name)]($style)";
-  cmake = {
-    disabled = true;
-    format = "via [$symbol]($style)";
+  aws.symbol = "aws ";
+  azure.symbol = "az ";
+
+  battery = {
+    full_symbol = "full ";
+    charging_symbol = "charging ";
+    discharging_symbol = "discharging ";
+    unknown_symbol = "unknown ";
+    empty_symbol = "empty ";
   };
-  cobol.format = "via [$symbol]($style)";
-  cpp.format = "via [$symbol($name)]($style)";
-  crystal.format = "via [$symbol]($style)";
-  daml.format = "via [$symbol]($style)";
-  dart.format = "via [$symbol]($style)";
-  deno.format = "via [$symbol]($style)";
-  dotnet.format = "[$symbol(🎯 $tfm )]($style)";
-  elixir.format = "via [$symbol]($style)";
-  elm.format = "via [$symbol]($style)";
-  erlang.format = "via [$symbol]($style)";
-  fennel.format = "via [$symbol]($style)";
-  fortran.format = "via [$symbol]($style)";
-  gleam.format = "via [$symbol]($style)";
-  golang.format = "via [$symbol]($style)";
-  gradle.format = "via [$symbol]($style)";
-  haskell.format = "via [$symbol]($style)";
-  haxe.format = "via [$symbol]($style)";
-  helm.format = "via [$symbol]($style)";
-  java.format = "via [$symbol]($style)";
-  julia.format = "via [$symbol]($style)";
-  kotlin.format = "via [$symbol]($style)";
-  lua.format = "via [$symbol]($style)";
-  meson.format = "via [$symbol]($style)";
-  mojo.format = "with [$symbol]($style)";
-  nim.format = "via [$symbol]($style)";
-  nodejs.format = "via [$symbol]($style)";
-  ocaml.format = "via [$symbol(\\($switch_indicator$switch_name\\) )]($style)";
-  odin.format = "via [$symbol]($style)";
-  opa.format = "via [$symbol]($style)";
-  perl.format = "via [$symbol]($style)";
-  php.format = "via [$symbol]($style)";
-  pixi.format = "via [$symbol($environment )]($style)";
-  pulumi.format = "via [$symbol$stack]($style)";
-  purescript.format = "via [$symbol]($style)";
-  python.format = "via [$symbol]($style)";
-  quarto.format = "via [$symbol]($style)";
-  raku.format = "via [$symbol]($style)";
-  red.format = "via [$symbol]($style)";
-  rlang.format = "via [$symbol]($style)";
-  ruby.format = "via [$symbol]($style)";
-  rust.format = "via [$symbol]($style)";
-  scala.format = "via [$symbol]($style)";
-  solidity.format = "via [$symbol]($style)";
-  swift.format = "via [$symbol]($style)";
-  typst.format = "via [$symbol]($style)";
-  vagrant.format = "via [$symbol]($style)";
-  vlang.format = "via [$symbol]($style)";
-  xmake.format = "via [$symbol]($style)";
-  zig.format = "via [$symbol]($style)";
+
+  buf.symbol = "buf ";
+  bun.symbol = "bun ";
+  c.symbol = "C ";
+  cpp.symbol = "C++ ";
+  cobol.symbol = "cobol ";
+  conda.symbol = "conda ";
+  container.symbol = "container ";
+  crystal.symbol = "cr ";
+  cmake.symbol = "cmake ";
+  daml.symbol = "daml ";
+  dart.symbol = "dart ";
+  deno.symbol = "deno ";
+
+  dotnet = {
+    format = "via [$symbol($version )(target $tfm )]($style)";
+    symbol = ".NET ";
+  };
+
+  directory.read_only = " ro";
+
+  docker_context.symbol = "docker ";
+  elixir.symbol = "exs ";
+  elm.symbol = "elm ";
+  erlang.symbol = "erl ";
+  fennel.symbol = "fnl ";
+  fortran.symbol = "fortran ";
+
+  fossil_branch = {
+    symbol = "fossil ";
+    truncation_symbol = "...";
+  };
+
+  gcloud.symbol = "gcp ";
+
+  git_branch = {
+    symbol = "git ";
+    truncation_symbol = "...";
+  };
+
+  gleam.symbol = "gleam ";
+  golang.symbol = "go ";
+  gradle.symbol = "gradle ";
+  guix_shell.symbol = "guix ";
+  haskell.symbol = "haskell ";
+  haxe.symbol = "hx ";
+  helm.symbol = "helm ";
+
+  hg_branch = {
+    symbol = "hg ";
+    truncation_symbol = "...";
+  };
+
+  hostname.ssh_symbol = "ssh ";
+  java.symbol = "java ";
+  jobs.symbol = "*";
+  julia.symbol = "jl ";
+  kotlin.symbol = "kt ";
+  kubernetes.symbol = "kubernetes ";
+  lua.symbol = "lua ";
+  maven.symbol = "maven ";
+  nodejs.symbol = "nodejs ";
+  memory_usage.symbol = "memory ";
+
+  meson = {
+    symbol = "meson ";
+    truncation_symbol = "...";
+  };
+
+  mojo.symbol = "mojo ";
+  nats.symbol = "nats ";
+  netns.symbol = "netns ";
+  nim.symbol = "nim ";
+  nix_shell.symbol = "nix ";
+  ocaml.symbol = "ml ";
+  odin.symbol = "odin ";
+  opa.symbol = "opa ";
+  openstack.symbol = "openstack ";
+
+  os.symbols = {
+    AIX = "aix ";
+    Alpaquita = "alq ";
+    AlmaLinux = "alma ";
+    Alpine = "alp ";
+    ALTLinux = "alt ";
+    Amazon = "amz ";
+    Android = "andr ";
+    AOSC = "aosc ";
+    Arch = "rch ";
+    Artix = "atx ";
+    Bluefin = "blfn ";
+    CachyOS = "cach ";
+    CentOS = "cent ";
+    Debian = "deb ";
+    DragonFly = "dfbsd ";
+    Elementary = "elem ";
+    Emscripten = "emsc ";
+    EndeavourOS = "ndev ";
+    Fedora = "fed ";
+    FreeBSD = "fbsd ";
+    Garuda = "garu ";
+    Gentoo = "gent ";
+    HardenedBSD = "hbsd ";
+    Illumos = "lum ";
+    Ios = "ios ";
+    InstantOS = "inst ";
+    Kali = "kali ";
+    Linux = "lnx ";
+    Mabox = "mbox ";
+    Macos = "mac ";
+    Manjaro = "mjo ";
+    Mariner = "mrn ";
+    MidnightBSD = "mid ";
+    Mint = "mint ";
+    NetBSD = "nbsd ";
+    NixOS = "nix ";
+    Nobara = "nbra ";
+    OpenBSD = "obsd ";
+    OpenCloudOS = "ocos ";
+    openEuler = "oeul ";
+    openSUSE = "osuse ";
+    OracleLinux = "orac ";
+    PikaOS = "pika ";
+    Pop = "pop ";
+    Raspbian = "rasp ";
+    Redhat = "rhl ";
+    RedHatEnterprise = "rhel ";
+    RockyLinux = "rky ";
+    Redox = "redox ";
+    Solus = "sol ";
+    SUSE = "suse ";
+    Ubuntu = "ubnt ";
+    Ultramarine = "ultm ";
+    Unknown = "unk ";
+    Uos = "uos ";
+    Void = "void ";
+    Windows = "win ";
+    Zorin = "zorn ";
+  };
+
+  package.symbol = "pkg ";
+  perl.symbol = "pl ";
+  php.symbol = "php ";
+
+  pijul_channel = {
+    symbol = "pijul ";
+    truncation_symbol = "...";
+  };
+
+  pixi.symbol = "pixi ";
+  pulumi.symbol = "pulumi ";
+  purescript.symbol = "purs ";
+  python.symbol = "py ";
+  quarto.symbol = "quarto ";
+  raku.symbol = "raku ";
+  red.symbol = "red ";
+  rlang.symbol = "r ";
+  ruby.symbol = "rb ";
+  rust.symbol = "rs ";
+  scala.symbol = "scala ";
+  shlvl.symbol = "shlvl ";
+  spack.symbol = "spack ";
+  solidity.symbol = "solidity ";
+
+  status = {
+    symbol = "[x](bold red) ";
+    not_executable_symbol = "noexec";
+    not_found_symbol = "notfound";
+    sigint_symbol = "sigint";
+    signal_symbol = "sig";
+  };
+
+  sudo.symbol = "sudo ";
+  swift.symbol = "swift ";
+  typst.symbol = "typst ";
+  vagrant.symbol = "vagrant ";
+  terraform.symbol = "terraform ";
+  xmake.symbol = "xmake ";
+  zig.symbol = "zig ";
 }
