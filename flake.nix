@@ -394,12 +394,12 @@
         ];
       };
 
-      homeConfigurations."aydin@darwin" = home-manager.lib.homeManagerConfiguration {
+      homeConfigurations."aydinaksel" = home-manager.lib.homeManagerConfiguration {
         pkgs = darwinPkgs;
         modules = [
           {
-            home.username = "aydin";
-            home.homeDirectory = "/Users/aydin";
+            home.username = "aydinaksel";
+            home.homeDirectory = "/Users/aydinaksel";
             home.stateVersion = "25.11";
 
             programs.home-manager.enable = true;
@@ -418,6 +418,21 @@
                 push.autoSetupRemote = true;
               };
             };
+            programs.ssh = {
+              enable = true;
+              enableDefaultConfig = false;
+              settings = {
+                "github.com" = {
+                  HostName = "github.com";
+                  User = "git";
+                  IdentityAgent = "\"~/Library/Group Containers/2BUA8C4S2C.com.1password/t/agent.sock\"";
+                };
+                "zeus" = {
+                  HostName = "zeus.darter-bebop.ts.net";
+                  User = "aydin";
+                };
+              };
+            };
             programs.starship = {
               enable = true;
               settings = import ./starship.nix;
@@ -425,10 +440,16 @@
 
             home.packages = with darwinPkgs; [
               claude-code
+              git
+              ruff
+              neovim
               nil
+              jq
               nixfmt
               ripgrep
               tree-sitter
+              gitui
+              bat
             ];
           }
         ];
