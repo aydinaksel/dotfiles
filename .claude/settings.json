@@ -14,6 +14,7 @@
       "Bash(gh search *)",
       "Bash(gh pr list *)",
       "Bash(gh pr diff *)",
+      "Bash(gh run list *)",
       "Bash(cargo check *)",
       "Bash(cargo search:*)",
       "Bash(cargo clippy *)",

@@ -1,10 +1,10 @@
-@conventions/rust-structured-logging.md
+@rules/rust-structured-logging.md
 
 # Dotfiles
 
-Config files under `~/.config/` and `~/.claude/` are symlinks into `~/Projects/dotfiles/`.
-When editing these files, resolve symlinks first with `readlink -f` and use the real path.
-The Edit tool refuses to write through symlinks.
+Config files under `~/.config/` and `~/.claude/` are managed by Home Manager (Nix).
+They are read-only symlinks to the Nix store. To change them, edit the source files
+in `~/dotfiles/` and rebuild with `home-manager switch --flake ~/dotfiles`.
 
 # Naming Conventions
 

@@ -28,6 +28,7 @@
       homeConfigurations."aydin@zeus" = home-manager.lib.homeManagerConfiguration {
         pkgs = linuxPkgs;
         modules = [
+          (import ./claude-code.nix)
           {
             home.username = "aydin";
             home.homeDirectory = "/home/aydin";
@@ -195,7 +196,6 @@
 
             home.packages = with linuxPkgs; [
               bat
-              claude-code
               dust
               gitui
               just
@@ -216,6 +216,7 @@
       homeConfigurations."aydin@hades" = home-manager.lib.homeManagerConfiguration {
         pkgs = linuxPkgs;
         modules = [
+          (import ./claude-code.nix)
           {
             home.username = "aydin";
             home.homeDirectory = "/home/aydin";
@@ -382,7 +383,6 @@
             };
 
             home.packages = with linuxPkgs; [
-              claude-code
               mdbook
               nil
               nixfmt
@@ -401,6 +401,7 @@
       homeConfigurations."aydinaksel" = home-manager.lib.homeManagerConfiguration {
         pkgs = darwinPkgs;
         modules = [
+          (import ./claude-code.nix)
           {
             home.username = "aydinaksel";
             home.homeDirectory = "/Users/aydinaksel";
@@ -443,7 +444,6 @@
             };
 
             home.packages = with darwinPkgs; [
-              claude-code
               git
               ruff
               neovim

@@ -18,6 +18,7 @@
   git_commit.tag_symbol = " tag ";
 
   git_status = {
+    format = "([\\[ $all_status$ahead_behind\\]]($style) )";
     ahead = "ahead $count ";
     behind = "behind $count ";
     diverged = "diverged $count ";
