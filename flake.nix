@@ -389,6 +389,10 @@
               ripgrep
               snowflake-cli
               tree-sitter
+              hcloud
+              hujsonfmt
+              wuzz
+              gopls
             ];
           }
         ];
