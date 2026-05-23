@@ -10,14 +10,24 @@
     vimcmd_replace_one_symbol = "[<](bold purple)";
   };
 
+  git_branch = {
+    symbol = "git ";
+    truncation_symbol = "...";
+  };
+
   git_commit.tag_symbol = " tag ";
 
   git_status = {
-    ahead = ">";
-    behind = "<";
-    diverged = "<>";
-    renamed = "r";
-    deleted = "x";
+    ahead = "ahead $count ";
+    behind = "behind $count ";
+    diverged = "diverged $count ";
+    renamed = "renamed $count ";
+    deleted = "deleted $count ";
+    conflicted = "conflicted $count ";
+    stashed = "stashed $count ";
+    modified = "modified $count ";
+    staged = "staged $count ";
+    untracked = "untracked $count ";
   };
 
   aws.symbol = "aws ";
@@ -31,32 +41,9 @@
     empty_symbol = "empty ";
   };
 
-  buf.symbol = "buf ";
-  bun.symbol = "bun ";
-  c.symbol = "C ";
-  cpp.symbol = "C++ ";
-  cobol.symbol = "cobol ";
-  conda.symbol = "conda ";
   container.symbol = "container ";
-  crystal.symbol = "cr ";
-  cmake.symbol = "cmake ";
-  daml.symbol = "daml ";
-  dart.symbol = "dart ";
-  deno.symbol = "deno ";
-
-  dotnet = {
-    format = "via [$symbol($version )(target $tfm )]($style)";
-    symbol = ".NET ";
-  };
-
   directory.read_only = " ro";
-
   docker_context.symbol = "docker ";
-  elixir.symbol = "exs ";
-  elm.symbol = "elm ";
-  erlang.symbol = "erl ";
-  fennel.symbol = "fnl ";
-  fortran.symbol = "fortran ";
 
   fossil_branch = {
     symbol = "fossil ";
@@ -64,18 +51,6 @@
   };
 
   gcloud.symbol = "gcp ";
-
-  git_branch = {
-    symbol = "git ";
-    truncation_symbol = "...";
-  };
-
-  gleam.symbol = "gleam ";
-  golang.symbol = "go ";
-  gradle.symbol = "gradle ";
-  guix_shell.symbol = "guix ";
-  haskell.symbol = "haskell ";
-  haxe.symbol = "hx ";
   helm.symbol = "helm ";
 
   hg_branch = {
@@ -84,29 +59,12 @@
   };
 
   hostname.ssh_symbol = "ssh ";
-  java.symbol = "java ";
   jobs.symbol = "*";
-  julia.symbol = "jl ";
-  kotlin.symbol = "kt ";
   kubernetes.symbol = "kubernetes ";
-  lua.symbol = "lua ";
-  maven.symbol = "maven ";
-  nodejs.symbol = "nodejs ";
   memory_usage.symbol = "memory ";
-
-  meson = {
-    symbol = "meson ";
-    truncation_symbol = "...";
-  };
-
-  mojo.symbol = "mojo ";
   nats.symbol = "nats ";
   netns.symbol = "netns ";
-  nim.symbol = "nim ";
   nix_shell.symbol = "nix ";
-  ocaml.symbol = "ml ";
-  odin.symbol = "odin ";
-  opa.symbol = "opa ";
   openstack.symbol = "openstack ";
 
   os.symbols = {
@@ -170,29 +128,13 @@
     Zorin = "zorn ";
   };
 
-  package.symbol = "pkg ";
-  perl.symbol = "pl ";
-  php.symbol = "php ";
-
   pijul_channel = {
     symbol = "pijul ";
     truncation_symbol = "...";
   };
 
-  pixi.symbol = "pixi ";
   pulumi.symbol = "pulumi ";
-  purescript.symbol = "purs ";
-  python.symbol = "py ";
-  quarto.symbol = "quarto ";
-  raku.symbol = "raku ";
-  red.symbol = "red ";
-  rlang.symbol = "r ";
-  ruby.symbol = "rb ";
-  rust.symbol = "rs ";
-  scala.symbol = "scala ";
   shlvl.symbol = "shlvl ";
-  spack.symbol = "spack ";
-  solidity.symbol = "solidity ";
 
   status = {
     symbol = "[x](bold red) ";
@@ -203,10 +145,61 @@
   };
 
   sudo.symbol = "sudo ";
-  swift.symbol = "swift ";
-  typst.symbol = "typst ";
-  vagrant.symbol = "vagrant ";
   terraform.symbol = "terraform ";
-  xmake.symbol = "xmake ";
-  zig.symbol = "zig ";
+  vagrant.symbol = "vagrant ";
+
+  buf.disabled = true;
+  bun.disabled = true;
+  c.disabled = true;
+  cmake.disabled = true;
+  cobol.disabled = true;
+  conda.disabled = true;
+  cpp.disabled = true;
+  crystal.disabled = true;
+  daml.disabled = true;
+  dart.disabled = true;
+  deno.disabled = true;
+  dotnet.disabled = true;
+  elixir.disabled = true;
+  elm.disabled = true;
+  erlang.disabled = true;
+  fennel.disabled = true;
+  fortran.disabled = true;
+  gleam.disabled = true;
+  golang.disabled = true;
+  gradle.disabled = true;
+  guix_shell.disabled = true;
+  haskell.disabled = true;
+  haxe.disabled = true;
+  java.disabled = true;
+  julia.disabled = true;
+  kotlin.disabled = true;
+  lua.disabled = true;
+  maven.disabled = true;
+  meson.disabled = true;
+  mojo.disabled = true;
+  nim.disabled = true;
+  nodejs.disabled = true;
+  ocaml.disabled = true;
+  odin.disabled = true;
+  opa.disabled = true;
+  package.disabled = true;
+  perl.disabled = true;
+  php.disabled = true;
+  pixi.disabled = true;
+  purescript.disabled = true;
+  python.disabled = true;
+  quarto.disabled = true;
+  raku.disabled = true;
+  red.disabled = true;
+  rlang.disabled = true;
+  ruby.disabled = true;
+  rust.disabled = true;
+  scala.disabled = true;
+  solidity.disabled = true;
+  spack.disabled = true;
+  swift.disabled = true;
+  typst.disabled = true;
+  xmake.disabled = true;
+  zig.disabled = true;
 }
