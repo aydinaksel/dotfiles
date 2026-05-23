@@ -1,4 +1,5 @@
 {
+  format = "($git_branch$git_commit$git_state$git_status\n)$username$hostname$directory$nix_shell$cmd_duration$line_break$character";
   continuation_prompt = "[.](bright-black) ";
 
   character = {
@@ -11,6 +12,7 @@
   };
 
   git_branch = {
+    format = "[$symbol$branch(:$remote_branch)]($style) ";
     symbol = "git ";
     truncation_symbol = "...";
   };
