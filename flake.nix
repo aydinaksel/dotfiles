@@ -234,10 +234,12 @@
 
             home.packages = with linuxPkgs; [
               bat
+              curl
               dust
+              jq
               just
               mdbook
-              neovim
+              (import ./neovim.nix { pkgs = linuxPkgs; })
               nil
               nixfmt
               qrrs
@@ -636,7 +638,7 @@
             home.packages = with darwinPkgs; [
               git
               ruff
-              neovim
+              (import ./neovim.nix { pkgs = darwinPkgs; })
               nil
               jq
               nixfmt
