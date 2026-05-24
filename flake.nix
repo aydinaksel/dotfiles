@@ -224,7 +224,11 @@
             };
             programs.zellij = {
               enable = true;
-              extraConfig = builtins.readFile ./linux/zellij/config.kdl;
+              settings = {
+                theme = "catppuccin-macchiato";
+                default_mode = "normal";
+                default_shell = "nu";
+              };
             };
 
             xdg.configFile = {
@@ -490,7 +494,11 @@
             };
             programs.zellij = {
               enable = true;
-              extraConfig = builtins.readFile ./linux/zellij/config.kdl;
+              settings = {
+                theme = "catppuccin-macchiato";
+                default_mode = "normal";
+                default_shell = "nu";
+              };
             };
 
             xdg.configFile = {
