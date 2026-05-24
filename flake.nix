@@ -184,6 +184,44 @@
                 })
               '';
             };
+            programs.gitui = {
+              enable = true;
+              theme = ''
+                (
+                    selected_tab: Some("Reset"),
+                    command_fg: Some("#cad3f5"),
+                    selection_bg: Some("#5b6078"),
+                    selection_fg: Some("#cad3f5"),
+                    cmdbar_bg: Some("#1e2030"),
+                    cmdbar_extra_lines_bg: Some("#1e2030"),
+                    disabled_fg: Some("#8087a2"),
+                    diff_line_add: Some("#a6da95"),
+                    diff_line_delete: Some("#ed8796"),
+                    diff_file_added: Some("#a6da95"),
+                    diff_file_removed: Some("#ee99a0"),
+                    diff_file_moved: Some("#c6a0f6"),
+                    diff_file_modified: Some("#f5a97f"),
+                    commit_hash: Some("#b7bdf8"),
+                    commit_time: Some("#b8c0e0"),
+                    commit_author: Some("#7dc4e4"),
+                    danger_fg: Some("#ed8796"),
+                    push_gauge_bg: Some("#8aadf4"),
+                    push_gauge_fg: Some("#24273a"),
+                    tag_fg: Some("#f4dbd6"),
+                    branch_fg: Some("#8bd5ca")
+                )
+              '';
+            };
+            programs.gh = {
+              enable = true;
+              settings = {
+                git_protocol = "https";
+                prompt = "enabled";
+                aliases = {
+                  co = "pr checkout";
+                };
+              };
+            };
             programs.zellij = {
               enable = true;
               extraConfig = builtins.readFile ./linux/zellij/config.kdl;
@@ -197,7 +235,6 @@
             home.packages = with linuxPkgs; [
               bat
               dust
-              gitui
               just
               mdbook
               neovim
@@ -372,6 +409,83 @@
                 })
               '';
             };
+            programs.gitui = {
+              enable = true;
+              theme = ''
+                (
+                    selected_tab: Some("Reset"),
+                    command_fg: Some("#cad3f5"),
+                    selection_bg: Some("#5b6078"),
+                    selection_fg: Some("#cad3f5"),
+                    cmdbar_bg: Some("#1e2030"),
+                    cmdbar_extra_lines_bg: Some("#1e2030"),
+                    disabled_fg: Some("#8087a2"),
+                    diff_line_add: Some("#a6da95"),
+                    diff_line_delete: Some("#ed8796"),
+                    diff_file_added: Some("#a6da95"),
+                    diff_file_removed: Some("#ee99a0"),
+                    diff_file_moved: Some("#c6a0f6"),
+                    diff_file_modified: Some("#f5a97f"),
+                    commit_hash: Some("#b7bdf8"),
+                    commit_time: Some("#b8c0e0"),
+                    commit_author: Some("#7dc4e4"),
+                    danger_fg: Some("#ed8796"),
+                    push_gauge_bg: Some("#8aadf4"),
+                    push_gauge_fg: Some("#24273a"),
+                    tag_fg: Some("#f4dbd6"),
+                    branch_fg: Some("#8bd5ca")
+                )
+              '';
+            };
+            programs.gh = {
+              enable = true;
+              settings = {
+                git_protocol = "https";
+                prompt = "enabled";
+                aliases = {
+                  co = "pr checkout";
+                };
+              };
+            };
+            programs.alacritty = {
+              enable = true;
+              package = null;
+              theme = "catppuccin_macchiato";
+              settings = {
+                env.TERM = "alacritty";
+                window = {
+                  padding = { x = 8; y = 8; };
+                  dynamic_padding = true;
+                  decorations = "full";
+                  opacity = 1.0;
+                };
+                scrolling = {
+                  history = 10000;
+                  multiplier = 3;
+                };
+                font = {
+                  size = 11.0;
+                  normal = { family = "JetBrainsMono Nerd Font Mono"; style = "Regular"; };
+                  bold = { family = "JetBrainsMono Nerd Font Mono"; style = "Bold"; };
+                  italic = { family = "JetBrainsMono Nerd Font Mono"; style = "Italic"; };
+                  bold_italic = { family = "JetBrainsMono Nerd Font Mono"; style = "Bold Italic"; };
+                };
+                cursor = {
+                  style = { shape = "Block"; blinking = "On"; };
+                  unfocused_hollow = true;
+                };
+                selection.save_to_clipboard = true;
+                mouse.hide_when_typing = true;
+                keyboard.bindings = [
+                  { key = "V"; mods = "Control|Shift"; action = "Paste"; }
+                  { key = "C"; mods = "Control|Shift"; action = "Copy"; }
+                  { key = "Plus"; mods = "Control"; action = "IncreaseFontSize"; }
+                  { key = "Minus"; mods = "Control"; action = "DecreaseFontSize"; }
+                  { key = "Key0"; mods = "Control"; action = "ResetFontSize"; }
+                  { key = "T"; mods = "Control|Shift"; action = "CreateNewWindow"; }
+                ];
+              };
+            };
             programs.zellij = {
               enable = true;
               extraConfig = builtins.readFile ./linux/zellij/config.kdl;
@@ -442,6 +556,82 @@
               enable = true;
               settings = import ./starship.nix;
             };
+            programs.gitui = {
+              enable = true;
+              theme = ''
+                (
+                    selected_tab: Some("Reset"),
+                    command_fg: Some("#cad3f5"),
+                    selection_bg: Some("#5b6078"),
+                    selection_fg: Some("#cad3f5"),
+                    cmdbar_bg: Some("#1e2030"),
+                    cmdbar_extra_lines_bg: Some("#1e2030"),
+                    disabled_fg: Some("#8087a2"),
+                    diff_line_add: Some("#a6da95"),
+                    diff_line_delete: Some("#ed8796"),
+                    diff_file_added: Some("#a6da95"),
+                    diff_file_removed: Some("#ee99a0"),
+                    diff_file_moved: Some("#c6a0f6"),
+                    diff_file_modified: Some("#f5a97f"),
+                    commit_hash: Some("#b7bdf8"),
+                    commit_time: Some("#b8c0e0"),
+                    commit_author: Some("#7dc4e4"),
+                    danger_fg: Some("#ed8796"),
+                    push_gauge_bg: Some("#8aadf4"),
+                    push_gauge_fg: Some("#24273a"),
+                    tag_fg: Some("#f4dbd6"),
+                    branch_fg: Some("#8bd5ca")
+                )
+              '';
+            };
+            programs.gh = {
+              enable = true;
+              settings = {
+                git_protocol = "https";
+                prompt = "enabled";
+                aliases = {
+                  co = "pr checkout";
+                };
+              };
+            };
+            programs.alacritty = {
+              enable = true;
+              theme = "catppuccin_macchiato";
+              settings = {
+                env.TERM = "alacritty";
+                window = {
+                  padding = { x = 8; y = 8; };
+                  dynamic_padding = true;
+                  decorations = "full";
+                  opacity = 1.0;
+                };
+                scrolling = {
+                  history = 10000;
+                  multiplier = 3;
+                };
+                font = {
+                  size = 11.0;
+                  normal = { family = "JetBrainsMono Nerd Font Mono"; style = "Regular"; };
+                  bold = { family = "JetBrainsMono Nerd Font Mono"; style = "Bold"; };
+                  italic = { family = "JetBrainsMono Nerd Font Mono"; style = "Italic"; };
+                  bold_italic = { family = "JetBrainsMono Nerd Font Mono"; style = "Bold Italic"; };
+                };
+                cursor = {
+                  style = { shape = "Block"; blinking = "On"; };
+                  unfocused_hollow = true;
+                };
+                selection.save_to_clipboard = true;
+                mouse.hide_when_typing = true;
+                keyboard.bindings = [
+                  { key = "V"; mods = "Super"; action = "Paste"; }
+                  { key = "C"; mods = "Super"; action = "Copy"; }
+                  { key = "Plus"; mods = "Super"; action = "IncreaseFontSize"; }
+                  { key = "Minus"; mods = "Super"; action = "DecreaseFontSize"; }
+                  { key = "Key0"; mods = "Super"; action = "ResetFontSize"; }
+                  { key = "N"; mods = "Super"; action = "CreateNewWindow"; }
+                ];
+              };
+            };
 
             home.packages = with darwinPkgs; [
               git
@@ -452,7 +642,6 @@
               nixfmt
               ripgrep
               tree-sitter
-              gitui
               bat
             ];
           }
