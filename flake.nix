@@ -456,8 +456,10 @@
             programs.alacritty = {
               enable = true;
               package = null;
-              theme = "catppuccin_macchiato";
               settings = {
+                general.import = [
+                  "${linuxPkgs.alacritty-theme}/share/alacritty-theme/catppuccin_macchiato.toml"
+                ];
                 env.TERM = "alacritty";
                 window = {
                   padding = { x = 8; y = 8; };
