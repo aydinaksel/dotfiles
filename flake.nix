@@ -362,7 +362,7 @@
                     | uniq
                 )
 
-                $env.SSH_AUTH_SOCK = $"($env.XDG_RUNTIME_DIR? | default $'/run/user/(id -u | str trim)')/ssh-agent.socket"
+                $env.SSH_AUTH_SOCK = $"($env.HOME)/.var/app/com.bitwarden.desktop/data/.bitwarden-ssh-agent.sock"
                 $env.GIT_SSH_COMMAND = "ssh"
 
                 $env.DIRENV_LOG_FORMAT = ""
@@ -462,7 +462,10 @@
                 ];
                 env.TERM = "alacritty";
                 window = {
-                  padding = { x = 8; y = 8; };
+                  padding = {
+                    x = 8;
+                    y = 8;
+                  };
                   dynamic_padding = true;
                   decorations = "full";
                   opacity = 1.0;
@@ -473,24 +476,63 @@
                 };
                 font = {
                   size = 11.0;
-                  normal = { family = "JetBrainsMono Nerd Font Mono"; style = "Regular"; };
-                  bold = { family = "JetBrainsMono Nerd Font Mono"; style = "Bold"; };
-                  italic = { family = "JetBrainsMono Nerd Font Mono"; style = "Italic"; };
-                  bold_italic = { family = "JetBrainsMono Nerd Font Mono"; style = "Bold Italic"; };
+                  normal = {
+                    family = "JetBrainsMono Nerd Font Mono";
+                    style = "Regular";
+                  };
+                  bold = {
+                    family = "JetBrainsMono Nerd Font Mono";
+                    style = "Bold";
+                  };
+                  italic = {
+                    family = "JetBrainsMono Nerd Font Mono";
+                    style = "Italic";
+                  };
+                  bold_italic = {
+                    family = "JetBrainsMono Nerd Font Mono";
+                    style = "Bold Italic";
+                  };
                 };
                 cursor = {
-                  style = { shape = "Block"; blinking = "On"; };
+                  style = {
+                    shape = "Block";
+                    blinking = "On";
+                  };
                   unfocused_hollow = true;
                 };
                 selection.save_to_clipboard = true;
                 mouse.hide_when_typing = true;
                 keyboard.bindings = [
-                  { key = "V"; mods = "Control|Shift"; action = "Paste"; }
-                  { key = "C"; mods = "Control|Shift"; action = "Copy"; }
-                  { key = "Plus"; mods = "Control"; action = "IncreaseFontSize"; }
-                  { key = "Minus"; mods = "Control"; action = "DecreaseFontSize"; }
-                  { key = "Key0"; mods = "Control"; action = "ResetFontSize"; }
-                  { key = "T"; mods = "Control|Shift"; action = "CreateNewWindow"; }
+                  {
+                    key = "V";
+                    mods = "Control|Shift";
+                    action = "Paste";
+                  }
+                  {
+                    key = "C";
+                    mods = "Control|Shift";
+                    action = "Copy";
+                  }
+                  {
+                    key = "Plus";
+                    mods = "Control";
+                    action = "IncreaseFontSize";
+                  }
+                  {
+                    key = "Minus";
+                    mods = "Control";
+                    action = "DecreaseFontSize";
+                  }
+                  {
+                    key = "Key0";
+                    mods = "Control";
+                    action = "ResetFontSize";
+                  }
+                  {
+                    key = "T";
+                    mods = "Control|Shift";
+                    action = "CreateNewWindow";
+                  }
                 ];
               };
             };
@@ -509,6 +551,7 @@
             };
 
             home.packages = with linuxPkgs; [
+              ffsend
               mdbook
               nil
               nixfmt
@@ -612,7 +655,10 @@
               settings = {
                 env.TERM = "alacritty";
                 window = {
-                  padding = { x = 8; y = 8; };
+                  padding = {
+                    x = 8;
+                    y = 8;
+                  };
                   dynamic_padding = true;
                   decorations = "full";
                   opacity = 1.0;
@@ -623,24 +669,63 @@
                 };
                 font = {
                   size = 11.0;
-                  normal = { family = "JetBrainsMono Nerd Font Mono"; style = "Regular"; };
-                  bold = { family = "JetBrainsMono Nerd Font Mono"; style = "Bold"; };
-                  italic = { family = "JetBrainsMono Nerd Font Mono"; style = "Italic"; };
-                  bold_italic = { family = "JetBrainsMono Nerd Font Mono"; style = "Bold Italic"; };
+                  normal = {
+                    family = "JetBrainsMono Nerd Font Mono";
+                    style = "Regular";
+                  };
+                  bold = {
+                    family = "JetBrainsMono Nerd Font Mono";
+                    style = "Bold";
+                  };
+                  italic = {
+                    family = "JetBrainsMono Nerd Font Mono";
+                    style = "Italic";
+                  };
+                  bold_italic = {
+                    family = "JetBrainsMono Nerd Font Mono";
+                    style = "Bold Italic";
+                  };
                 };
                 cursor = {
-                  style = { shape = "Block"; blinking = "On"; };
+                  style = {
+                    shape = "Block";
+                    blinking = "On";
+                  };
                   unfocused_hollow = true;
                 };
                 selection.save_to_clipboard = true;
                 mouse.hide_when_typing = true;
                 keyboard.bindings = [
-                  { key = "V"; mods = "Super"; action = "Paste"; }
-                  { key = "C"; mods = "Super"; action = "Copy"; }
-                  { key = "Plus"; mods = "Super"; action = "IncreaseFontSize"; }
-                  { key = "Minus"; mods = "Super"; action = "DecreaseFontSize"; }
-                  { key = "Key0"; mods = "Super"; action = "ResetFontSize"; }
-                  { key = "N"; mods = "Super"; action = "CreateNewWindow"; }
+                  {
+                    key = "V";
+                    mods = "Super";
+                    action = "Paste";
+                  }
+                  {
+                    key = "C";
+                    mods = "Super";
+                    action = "Copy";
+                  }
+                  {
+                    key = "Plus";
+                    mods = "Super";
+                    action = "IncreaseFontSize";
+                  }
+                  {
+                    key = "Minus";
+                    mods = "Super";
+                    action = "DecreaseFontSize";
+                  }
+                  {
+                    key = "Key0";
+                    mods = "Super";
+                    action = "ResetFontSize";
+                  }
+                  {
+                    key = "N";
+                    mods = "Super";
+                    action = "CreateNewWindow";
+                  }
                 ];
               };
             };
