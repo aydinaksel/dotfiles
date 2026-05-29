@@ -52,13 +52,14 @@
       model = "claude-opus-4-6";
       statusLine = {
         type = "command";
-        command = "bash ${./statusline.sh}";
+        command = "bash ${../statusline.sh}";
       };
       spinnerTipsEnabled = false;
       servers = { };
       effortLevel = "medium";
       remoteControlAtStartup = false;
       prefersReducedMotion = true;
+      theme = "dark";
     };
 
     context = ''
@@ -207,7 +208,7 @@
     };
 
     skills = {
-      rust-guidelines = ./.claude/skills/rust-guidelines;
+      rust-guidelines = ../.claude/skills/rust-guidelines;
     };
   };
 }

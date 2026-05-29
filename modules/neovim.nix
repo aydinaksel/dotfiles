@@ -37,7 +37,7 @@ let
 
   configFiles = pkgs.stdenv.mkDerivation {
     name = "neovim-config";
-    src = ./nvim;
+    src = ../nvim;
     installPhase = ''
       mkdir -p $out
       cp -r . $out/
