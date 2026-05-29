@@ -7,6 +7,7 @@
     ../../modules/nushell.nix
     ../../modules/alacritty.nix
     ../../modules/alacritty-darwin.nix
+    ../../modules/zellij.nix
   ];
 
   home.username = "aydinaksel";
