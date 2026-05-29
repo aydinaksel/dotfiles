@@ -5,8 +5,8 @@
       env.TERM = "alacritty";
       window = {
         padding = {
-          x = 8;
-          y = 8;
+          x = 16;
+          y = 16;
         };
         dynamic_padding = true;
         decorations = "None";
