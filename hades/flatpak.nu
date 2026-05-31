@@ -37,6 +37,7 @@ let desired = [
     "com.stremio.Stremio"
     "com.rustdesk.RustDesk"
     "org.gramps_project.Gramps"
+    "org.gnome.Fractal"
 ]
 
 let installed = (flatpak list --app --columns=application | lines)
