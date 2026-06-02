@@ -38,6 +38,7 @@ let desired = [
     "com.rustdesk.RustDesk"
     "org.gramps_project.Gramps"
     "org.gnome.Fractal"
+    "fr.free.Homebank"
 ]
 
 let installed = (flatpak list --app --columns=application | lines)
