@@ -22,6 +22,10 @@
     $env.GIT_SSH_COMMAND = "ssh"
   '';
 
+  home.sessionVariables = {
+    MOZ_ENABLE_WAYLAND = "1";
+  };
+
   fonts.fontconfig.enable = true;
 
   home.packages = with pkgs; [
