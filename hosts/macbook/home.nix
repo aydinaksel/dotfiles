@@ -14,6 +14,8 @@
   home.homeDirectory = "/Users/aydinaksel";
   home.stateVersion = "25.11";
 
+  xdg.enable = true;
+
   programs.home-manager.enable = true;
 
   programs.ssh = {

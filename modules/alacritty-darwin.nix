@@ -1,7 +1,9 @@
+{ config, ... }:
 {
   programs.alacritty = {
     theme = "catppuccin_macchiato";
     settings = {
+      env.XDG_CONFIG_HOME = "${config.home.homeDirectory}/.config";
       terminal.shell.program = "/etc/profiles/per-user/aydinaksel/bin/nu";
       keyboard.bindings = [
         { key = "V"; mods = "Super"; action = "Paste"; }
