@@ -41,6 +41,11 @@
         modules = [ ./hosts/hades ];
       };
 
+      homeConfigurations."aydin@poseidon" = home-manager.lib.homeManagerConfiguration {
+        pkgs = linuxPkgs;
+        modules = [ ./hosts/hades ];
+      };
+
       darwinConfigurations."macbook" = nix-darwin.lib.darwinSystem {
         modules = [
           ./hosts/macbook
