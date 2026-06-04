@@ -11,7 +11,7 @@
         dynamic_padding = true;
         decorations = "None";
         opacity = 1.0;
-        startup_mode = "Fullscreen";
+        startup_mode = "Windowed";
       };
       scrolling = {
         history = 10000;

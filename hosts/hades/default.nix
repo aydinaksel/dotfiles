@@ -9,6 +9,7 @@
     ../../modules/zellij.nix
     ../../modules/alacritty.nix
     ../../modules/alacritty-linux.nix
+    ../../modules/gnome.nix
   ];
 
   home.username = "aydin";
