@@ -21,7 +21,10 @@ in
     };
 
     "org/gnome/desktop/wm/keybindings" = {
+      activate-window-menu = [ "<Super>space" ];
       maximize = [];
+      switch-input-source = [];
+      switch-input-source-backward = [];
       unmaximize = [];
     };
 
@@ -35,7 +38,8 @@ in
       enable-smart-window-border-radius = true;
       enable-snap-assist = false;
       enable-window-border = true;
-      cycle-layouts = [ "<Super>f" ];
+      cycle-layouts = [];
+      span-window-all-tiles = [ "<Super>f" ];
       move-window-up = [ "<Super>Up" ];
       move-window-down = [ "<Super>Down" ];
       move-window-left = [];
@@ -45,7 +49,7 @@ in
       focus-window-prev = [ "<Super>Left" ];
       focus-window-up = [];
       last-version-name-installed = "17.3";
-      layouts-json = ''[{"id":"87113171","tiles":[{"x":0,"y":0,"width":1,"height":0.5,"groups":[2]},{"x":0,"y":0.5,"width":1,"height":0.5,"groups":[2]}]},{"id":"full","tiles":[{"x":0,"y":0,"width":1,"height":1,"groups":[1]}]}]'';
+      layouts-json = ''[{"id":"87113171","tiles":[{"x":0,"y":0,"width":1,"height":0.5,"groups":[1]},{"x":0,"y":0.5,"width":1,"height":0.5,"groups":[1]}]}]'';
       overridden-settings = ''{"org.gnome.mutter.keybindings":{"toggle-tiled-right":"['<Super>Right']","toggle-tiled-left":"['<Super>Left']"},"org.gnome.desktop.wm.keybindings":{"maximize":"['<Super>Up']","unmaximize":"['<Super>Down', '<Alt>F5']"},"org.gnome.mutter":{"edge-tiling":"true"}}'';
       selected-layouts = [ [ "87113171" "87113171" ] [ "87113171" "87113171" ] ];
       show-indicator = false;
