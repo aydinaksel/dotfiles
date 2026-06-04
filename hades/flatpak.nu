@@ -39,6 +39,8 @@ let desired = [
     "org.gramps_project.Gramps"
     "org.gnome.Fractal"
     "fr.free.Homebank"
+    "com.github.jeromerobert.pdfarranger"
+    "com.pojtinger.felicitas.Sessions"
 ]
 
 let installed = (flatpak list --app --columns=application | lines)
