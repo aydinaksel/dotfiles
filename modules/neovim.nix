@@ -3,7 +3,7 @@
 let
   plugins = with pkgs.vimPlugins; [
     lazy-nvim
-    tokyonight-nvim
+    catppuccin-nvim
     telescope-nvim
     telescope-fzf-native-nvim
     plenary-nvim
@@ -13,6 +13,7 @@ let
     friendly-snippets
     (nvim-treesitter.withPlugins (
       parsers: with parsers; [
+        apex
         bash
         css
         go
@@ -21,9 +22,12 @@ let
         json
         lua
         markdown
+        markdown_inline
         nix
         python
         rust
+        soql
+        sosl
         sql
         terraform
         toml
