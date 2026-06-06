@@ -33,6 +33,7 @@
     nerd-fonts.jetbrains-mono
     ffsend
     mdbook
+    (import ../../modules/neovim.nix { inherit pkgs; })
     nil
     nixfmt
     ripgrep
