@@ -59,7 +59,7 @@
   #  /etc/profiles/per-user/aydin/etc/profile.d/hm-session-vars.sh
   #
   home.sessionVariables = {
-    # EDITOR = "emacs";
+    LOCAL_KEY = "/home/aydin/.local/share/nix/secret-key";
   };
 
   # Let Home Manager install and manage itself.

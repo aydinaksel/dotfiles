@@ -107,9 +107,9 @@ in
 
     "org/gnome/shell/extensions/tilingshell" = {
       edge-tiling-mode = "default";
-      enable-smart-window-border-radius = true;
+      enable-smart-window-border-radius = false;
       enable-snap-assist = false;
-      enable-window-border = true;
+      enable-window-border = false;
       cycle-layouts = [];
       span-window-all-tiles = [ "<Super>f" ];
       move-window-up = [ "<Super>Up" ];
