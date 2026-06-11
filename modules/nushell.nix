@@ -79,4 +79,10 @@
       })
     '';
   };
+
+  xdg.configFile = {
+    "nushell/autoload/claude-prune-projects.nu".source = ../nu/autoload/claude-prune-projects.nu;
+    "nushell/autoload/claude-reset.nu".source = ../nu/autoload/claude-reset.nu;
+    "nushell/autoload/just.nu".source = ../nu/autoload/just.nu;
+  };
 }

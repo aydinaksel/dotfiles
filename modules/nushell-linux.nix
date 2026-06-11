@@ -52,8 +52,4 @@
     '';
   };
 
-  xdg.configFile = {
-    "nushell/autoload/claude-prune-projects.nu".source = ../linux/nu/autoload/claude-prune-projects.nu;
-    "nushell/autoload/claude-reset.nu".source = ../linux/nu/autoload/claude-reset.nu;
-  };
 }
