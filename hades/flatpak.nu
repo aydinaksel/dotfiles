@@ -8,6 +8,8 @@ let desired = [
     "org.gnome.Characters"
     "org.gnome.Contacts"
     "org.gnome.Connections"
+    "org.gnome.Fractal"
+    "org.gnome.Mahjongg"
     "org.gnome.Papers"
     "org.gnome.TextEditor"
     "org.gnome.Snapshot"
@@ -37,10 +39,15 @@ let desired = [
     "com.stremio.Stremio"
     "com.rustdesk.RustDesk"
     "org.gramps_project.Gramps"
-    "org.gnome.Fractal"
     "fr.free.Homebank"
     "com.github.jeromerobert.pdfarranger"
     "com.pojtinger.felicitas.Sessions"
+    "com.github.johnfactotum.Foliate"
+    "es.danirod.Cartero"
+    "io.github.zingytomato.netpeek"
+    "org.freecad.FreeCAD"
+    "org.blender.Blender"
+    "com.sweethome3d.Sweethome3d"
 ]
 
 let installed = (flatpak list --app --columns=application | lines)
