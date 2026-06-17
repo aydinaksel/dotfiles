@@ -25,9 +25,19 @@
 
   home.sessionVariables = {
     MOZ_ENABLE_WAYLAND = "1";
+    XDG_DATA_DIRS = "$HOME/.nix-profile/share:\${XDG_DATA_DIRS:-/usr/local/share:/usr/share}";
   };
 
   fonts.fontconfig.enable = true;
+
+  xdg.desktopEntries.mgba = {
+    name = "mGBA";
+    genericName = "Game Boy Advance Emulator";
+    exec = "mgba-qt %f";
+    icon = "${pkgs.mgba}/share/icons/hicolor/256x256/apps/io.mgba.mGBA.png";
+    categories = [ "Game" "Emulator" ];
+    mimeType = [ "application/x-gameboy-advance-rom" ];
+  };
 
   home.packages = with pkgs; [
     nerd-fonts.jetbrains-mono
@@ -43,5 +53,10 @@
     hujsonfmt
     wuzz
     gopls
+    (pkgs.writeShellApplication {
+      name = "mgba-qt";
+      runtimeInputs = [ pkgs.nixgl.nixGLIntel pkgs.mgba ];
+      text = ''nixGLIntel mgba-qt "$@"'';
+    })
   ];
 }

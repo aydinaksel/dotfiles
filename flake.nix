@@ -11,6 +11,10 @@
       url = "github:LnL7/nix-darwin";
       inputs.nixpkgs.follows = "nixpkgs";
     };
+    nixgl = {
+      url = "github:nix-community/nixGL";
+      inputs.nixpkgs.follows = "nixpkgs";
+    };
   };
 
   outputs =
@@ -18,6 +22,7 @@
       nixpkgs,
       home-manager,
       nix-darwin,
+      nixgl,
       ...
     }:
     let
@@ -28,6 +33,7 @@
       linuxPkgs = import nixpkgs {
         system = "x86_64-linux";
         config.allowUnfreePredicate = allowUnfree;
+        overlays = [ nixgl.overlay ];
       };
     in
     {
