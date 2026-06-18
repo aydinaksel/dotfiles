@@ -1,66 +1,72 @@
+{ pkgs, lib, ... }:
+let
+  settings = {
+    env = {
+      CLAUDE_CODE_ENABLE_TELEMETRY = "0";
+    };
+    permissions = {
+      allow = [
+        "Read(~/*)"
+        "Bash(git -C * status)"
+        "Bash(git -C * diff)"
+        "Bash(git -C * diff --stat)"
+        "Bash(git add *)"
+        "Bash(git commit -m ' *)"
+        "Bash(gh search *)"
+        "Bash(gh pr list *)"
+        "Bash(gh pr diff *)"
+        "Bash(gh run list *)"
+        "Bash(grep *)"
+        "Bash(cargo check *)"
+        "Bash(cargo search:*)"
+        "Bash(cargo clippy *)"
+        "Bash(cargo build *)"
+        ''Bash(docker exec postgres psql -U admin -d demeter -c "SELECT *)''
+        "Bash(docker exec postgres psql -U admin -d demeter -c 'SELECT *)"
+        "WebSearch"
+        "WebFetch(domain:crates.io)"
+        "WebFetch(domain:docs.rs)"
+        "WebFetch(domain:github.com)"
+        "WebFetch(domain:raw.githubusercontent.com)"
+        "WebFetch(domain:fly.io)"
+        "WebFetch(domain:book.leptos.dev)"
+        "WebFetch(domain:davidchipperfield.com)"
+        "WebFetch(domain:api.quickfile.co.uk)"
+        "WebFetch(domain:kemset.com)"
+        "WebFetch(domain:obsidian.md)"
+        "WebFetch(domain:help.obsidian.md)"
+      ];
+      deny = [
+        "Read(./.env)"
+        "Read(./.env.*)"
+        "Read(~/.secrets/*)"
+        "Bash(cat ~/.secrets/*)"
+        "Bash(cat /home/aydin/.secrets/*)"
+      ];
+      ask = [
+        "Bash(curl *)"
+      ];
+    };
+    model = "claude-opus-4-8";
+    statusLine = {
+      type = "command";
+      command = "bash ${../statusline.sh}";
+    };
+    spinnerTipsEnabled = false;
+    servers = { };
+    effortLevel = "medium";
+    remoteControlAtStartup = false;
+    prefersReducedMotion = true;
+    theme = "dark";
+  };
+
+  settingsFile = (pkgs.formats.json { }).generate "claude-code-settings.json" (
+    settings // { "$schema" = "https://json.schemastore.org/claude-code-settings.json"; }
+  );
+in
 {
   programs.claude-code = {
     enable = true;
-
-    settings = {
-      env = {
-        CLAUDE_CODE_ENABLE_TELEMETRY = "0";
-      };
-      permissions = {
-        allow = [
-          "Read(~/*)"
-          "Bash(git -C * status)"
-          "Bash(git -C * diff)"
-          "Bash(git -C * diff --stat)"
-          "Bash(git add *)"
-          "Bash(git commit -m ' *)"
-          "Bash(gh search *)"
-          "Bash(gh pr list *)"
-          "Bash(gh pr diff *)"
-          "Bash(gh run list *)"
-          "Bash(grep *)"
-          "Bash(cargo check *)"
-          "Bash(cargo search:*)"
-          "Bash(cargo clippy *)"
-          "Bash(cargo build *)"
-          ''Bash(docker exec postgres psql -U admin -d demeter -c "SELECT *)''
-          "Bash(docker exec postgres psql -U admin -d demeter -c 'SELECT *)"
-          "WebSearch"
-          "WebFetch(domain:crates.io)"
-          "WebFetch(domain:docs.rs)"
-          "WebFetch(domain:github.com)"
-          "WebFetch(domain:raw.githubusercontent.com)"
-          "WebFetch(domain:fly.io)"
-          "WebFetch(domain:book.leptos.dev)"
-          "WebFetch(domain:davidchipperfield.com)"
-          "WebFetch(domain:api.quickfile.co.uk)"
-          "WebFetch(domain:kemset.com)"
-          "WebFetch(domain:obsidian.md)"
-          "WebFetch(domain:help.obsidian.md)"
-        ];
-        deny = [
-          "Read(./.env)"
-          "Read(./.env.*)"
-          "Read(~/.secrets/*)"
-          "Bash(cat ~/.secrets/*)"
-          "Bash(cat /home/aydin/.secrets/*)"
-        ];
-        ask = [
-          "Bash(curl *)"
-        ];
-      };
-      model = "claude-opus-4-6";
-      statusLine = {
-        type = "command";
-        command = "bash ${../statusline.sh}";
-      };
-      spinnerTipsEnabled = false;
-      servers = { };
-      effortLevel = "medium";
-      remoteControlAtStartup = false;
-      prefersReducedMotion = true;
-      theme = "dark";
-    };
 
     context = ''
       @rules/rust-structured-logging.md
@@ -101,6 +107,7 @@
       - Use types to encode constraints instead of describing them in comments (e.g. `optional<T>` instead of a `-1` convention).
 
       Comments are acceptable in narrow cases:
+
       - Non-obvious code written for performance reasons, explain *why* it looks weird.
       - References to a specific algorithm or mathematical principle, link to the source.
 
@@ -211,4 +218,10 @@
       rust-guidelines = ../.claude/skills/rust-guidelines;
     };
   };
+
+  home.activation.claudeCodeWritableSettings = lib.hm.dag.entryAfter [ "writeBoundary" ] ''
+    run mkdir -p "$HOME/.claude"
+    run rm -f "$HOME/.claude/settings.json"
+    run install -m600 ${settingsFile} "$HOME/.claude/settings.json"
+  '';
 }
