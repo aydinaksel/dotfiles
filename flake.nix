@@ -2,9 +2,9 @@
   description = "Aydin's dotfiles";
 
   inputs = {
-    nixpkgs.url = "https://flakehub.com/f/NixOS/nixpkgs/0.1";
+    nixpkgs.url = "github:NixOS/nixpkgs/nixos-unstable";
     home-manager = {
-      url = "https://flakehub.com/f/nix-community/home-manager/0.1";
+      url = "github:nix-community/home-manager";
       inputs.nixpkgs.follows = "nixpkgs";
     };
     nix-darwin = {
