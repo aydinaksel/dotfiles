@@ -14,6 +14,7 @@ in
     ../../modules/alacritty.nix
     ../../modules/alacritty-linux.nix
     ../../modules/gnome.nix
+    ./ssh.nix
   ];
 
   home.username = "aydin";
