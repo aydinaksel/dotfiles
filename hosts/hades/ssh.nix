@@ -4,101 +4,101 @@
     enable = true;
     enableDefaultConfig = false;
 
-    matchBlocks = {
+    settings = {
       apollo = {
-        hostname = "157.180.27.246";
-        user = "aydin";
-        identityFile = "~/.ssh/apollo.pub";
-        identitiesOnly = true;
+        HostName = "157.180.27.246";
+        User = "aydin";
+        IdentityFile = "~/.ssh/apollo.pub";
+        IdentitiesOnly = true;
       };
       helios = {
-        hostname = "5.78.186.219";
-        user = "aydin";
-        identityFile = "~/.ssh/helios.pub";
-        identitiesOnly = true;
+        HostName = "5.78.186.219";
+        User = "aydin";
+        IdentityFile = "~/.ssh/helios.pub";
+        IdentitiesOnly = true;
       };
       dionysus = {
-        hostname = "178.156.169.27";
-        user = "aydin";
-        identityFile = "~/.ssh/dionysus.pub";
-        identitiesOnly = true;
+        HostName = "178.156.169.27";
+        User = "aydin";
+        IdentityFile = "~/.ssh/dionysus.pub";
+        IdentitiesOnly = true;
       };
       hestia = {
-        hostname = "5.78.76.204";
-        user = "aydin";
-        identityFile = "~/.ssh/hestia.pub";
-        identitiesOnly = true;
+        HostName = "5.78.76.204";
+        User = "aydin";
+        IdentityFile = "~/.ssh/hestia.pub";
+        IdentitiesOnly = true;
       };
       atlas = {
-        hostname = "46.62.204.137";
-        user = "aydin";
-        identityFile = "~/.ssh/atlas.pub";
-        identitiesOnly = true;
+        HostName = "46.62.204.137";
+        User = "aydin";
+        IdentityFile = "~/.ssh/atlas.pub";
+        IdentitiesOnly = true;
       };
       pan = {
-        hostname = "5.161.195.52";
-        user = "aydin";
-        identityFile = "~/.ssh/pan.pub";
-        identitiesOnly = true;
+        HostName = "5.161.195.52";
+        User = "aydin";
+        IdentityFile = "~/.ssh/pan.pub";
+        IdentitiesOnly = true;
       };
       "github.com" = {
-        identityFile = "~/.ssh/github.pub";
-        addKeysToAgent = "yes";
+        IdentityFile = "~/.ssh/github.pub";
+        AddKeysToAgent = true;
       };
       freepbx = {
-        hostname = "100.95.186.96";
-        port = 22;
-        user = "root";
-        identityFile = "~/.ssh/id_ed25519_vultr_2025-09-09";
-        identitiesOnly = true;
-        setEnv.TERM = "xterm-256color";
+        HostName = "100.95.186.96";
+        Port = 22;
+        User = "root";
+        IdentityFile = "~/.ssh/id_ed25519_vultr_2025-09-09";
+        IdentitiesOnly = true;
+        SetEnv.TERM = "xterm-256color";
       };
       dc2 = {
-        hostname = "100.64.0.27";
-        port = 22;
-        user = "fbradmin";
-        identityFile = "~/.ssh/id_ed25519_dc2";
-        identitiesOnly = true;
-        setEnv.TERM = "xterm-256color";
+        HostName = "100.64.0.27";
+        Port = 22;
+        User = "fbradmin";
+        IdentityFile = "~/.ssh/id_ed25519_dc2";
+        IdentitiesOnly = true;
+        SetEnv.TERM = "xterm-256color";
       };
       headscale = {
-        hostname = "vpn.chichek.co.uk";
-        port = 22;
-        user = "root";
-        identityFile = "~/.ssh/id_ed25519_chichek_infrastructure";
-        identitiesOnly = true;
-        setEnv.TERM = "xterm-256color";
+        HostName = "vpn.chichek.co.uk";
+        Port = 22;
+        User = "root";
+        IdentityFile = "~/.ssh/id_ed25519_chichek_infrastructure";
+        IdentitiesOnly = true;
+        SetEnv.TERM = "xterm-256color";
       };
       zeus = {
-        hostname = "zeus.darter-bebop.ts.net";
-        port = 22;
-        user = "aydin";
-        identityFile = "~/.ssh/id_ed25519_zeus_2025-07-13";
-        identitiesOnly = true;
-        setEnv.TERM = "xterm-256color";
+        HostName = "zeus.darter-bebop.ts.net";
+        Port = 22;
+        User = "aydin";
+        IdentityFile = "~/.ssh/id_ed25519_zeus_2025-07-13";
+        IdentitiesOnly = true;
+        SetEnv.TERM = "xterm-256color";
       };
       zeus-local = {
-        hostname = "10.0.12.15";
-        port = 22;
-        user = "aydin";
-        identityFile = "~/.ssh/id_ed25519_zeus_2025-07-13";
-        identitiesOnly = true;
-        setEnv.TERM = "xterm-256color";
+        HostName = "10.0.12.15";
+        Port = 22;
+        User = "aydin";
+        IdentityFile = "~/.ssh/id_ed25519_zeus_2025-07-13";
+        IdentitiesOnly = true;
+        SetEnv.TERM = "xterm-256color";
       };
       remarkable = {
-        hostname = "10.11.99.1";
-        port = 22;
-        user = "root";
-        forwardX11 = false;
-        forwardAgent = false;
-        setEnv.TERM = "xterm-256color";
+        HostName = "10.11.99.1";
+        Port = 22;
+        User = "root";
+        ForwardX11 = false;
+        ForwardAgent = false;
+        SetEnv.TERM = "xterm-256color";
       };
       sapserver = {
-        hostname = "100.106.223.11";
-        port = 22;
-        user = "hikmetfbr";
-        identityFile = "~/.ssh/id_ed25519_sapserver_2026-03-12";
-        identitiesOnly = true;
+        HostName = "100.106.223.11";
+        Port = 22;
+        User = "hikmetfbr";
+        IdentityFile = "~/.ssh/id_ed25519_sapserver_2026-03-12";
+        IdentitiesOnly = true;
       };
     };
   };
