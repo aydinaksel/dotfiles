@@ -23,6 +23,7 @@ let
       uuid = "7bdc670f-00e8-4f16-a181-b47a00fb2d2c";
       owner = "github-runner";
       group = "github-runner";
+      trailingNewline = true;
     };
     "tailscale-oauth-client-secret" = {
       uuid = "a7ea5f37-e75a-4cfd-9e93-b47a00d72a1b";
@@ -51,7 +52,10 @@ let
           name: secret:
           let
             outputFlag = if secret.outputFormat or "" == "env" then "--output env" else "--output json";
-            extractValue = if secret.outputFormat or "" == "env" then "" else " | jq -j '.value'";
+            extractValue =
+              if secret.outputFormat or "" == "env" then ""
+              else if secret.trailingNewline or false then " | jq -r '.value'"
+              else " | jq -j '.value'";
           in
           ''
             bws secret get ${secret.uuid} ${outputFlag}${extractValue} > /run/secrets/${name}
