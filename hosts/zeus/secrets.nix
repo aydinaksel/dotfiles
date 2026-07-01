@@ -12,13 +12,18 @@ let
       name = "github-runner-${runner.name}";
       value = {
         uuid = runner.secretUuid;
-        owner = "root";
-        group = "root";
+        owner = "github-runner";
+        group = "github-runner";
       };
     }) runners
   );
 
   secrets = runnerSecrets // {
+    "github-runner-ssh-key" = {
+      uuid = "7bdc670f-00e8-4f16-a181-b47a00fb2d2c";
+      owner = "github-runner";
+      group = "github-runner";
+    };
     "tailscale-oauth-client-secret" = {
       uuid = "a7ea5f37-e75a-4cfd-9e93-b47a00d72a1b";
       owner = "root";
