@@ -1,39 +1,61 @@
-{ pkgs, ... }:
+{ config, lib, pkgs, ... }:
+
 {
   imports = [
-    ../../modules/claude-code.nix
-    ../../modules/git.nix
-    ../../modules/shell-tools.nix
-    ../../modules/nushell.nix
-    ../../modules/nushell-linux.nix
-    ../../modules/zellij.nix
+    ./hardware-configuration.nix
+    ./secrets.nix
+    ./tailscale.nix
+    ./github-runners.nix
   ];
 
-  home.username = "aydin";
-  home.homeDirectory = "/home/aydin";
-  home.stateVersion = "25.11";
+  boot.loader.systemd-boot.enable = true;
+  boot.loader.efi.canTouchEfiVariables = true;
 
-  programs.home-manager.enable = true;
+  networking.hostName = "zeus";
+  networking.networkmanager.enable = true;
 
-  programs.nushell.extraEnv = ''
-    $env.SSH_AUTH_SOCK = $"($env.XDG_RUNTIME_DIR? | default $'/run/user/(id -u | str trim)')/ssh-agent.socket"
-    $env.GIT_SSH_COMMAND = "ssh"
-  '';
+  time.timeZone = "Europe/London";
 
-  home.packages = with pkgs; [
-    bat
-    curl
-    dust
-    jq
-    just
-    mdbook
-    (import ../../modules/neovim.nix { inherit pkgs; })
-    nil
-    nixfmt
-    qrrs
-    ripgrep
-    rustlings
-    tree-sitter
-    xh
+  nix.settings = {
+    experimental-features = "nix-command flakes";
+    trusted-users = [ "aydin" ];
+  };
+
+  nixpkgs.config.allowUnfreePredicate =
+    package: builtins.elem (lib.getName package) [ "claude-code" "bws" ];
+
+  users.users = {
+    root.hashedPassword = "!";
+    aydin = {
+      isNormalUser = true;
+      extraGroups = [ "wheel" ];
+      shell = pkgs.nushell;
+      openssh.authorizedKeys.keys = [
+        "ssh-ed25519 AAAAC3NzaC1lZDI1NTE5AAAAILjiVN9Wh8FP+c1nHYSrQ0jztfymnEomxwxNVoW7/Iqy zeus key for hades"
+      ];
+    };
+  };
+
+  environment.shells = [ pkgs.nushell ];
+
+  security.sudo.wheelNeedsPassword = false;
+
+  services.openssh = {
+    enable = true;
+    openFirewall = true;
+    settings = {
+      PermitRootLogin = "no";
+      PasswordAuthentication = false;
+      KbdInteractiveAuthentication = false;
+    };
+  };
+
+  environment.systemPackages = with pkgs; [
+    vim
+    git
+    gh
+    htop
   ];
+
+  system.stateVersion = "26.05";
 }

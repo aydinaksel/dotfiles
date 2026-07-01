@@ -37,9 +37,17 @@
       };
     in
     {
-      homeConfigurations."aydin@zeus" = home-manager.lib.homeManagerConfiguration {
-        pkgs = linuxPkgs;
-        modules = [ ./hosts/zeus ];
+      nixosConfigurations.zeus = nixpkgs.lib.nixosSystem {
+        system = "x86_64-linux";
+        modules = [
+          ./hosts/zeus
+          home-manager.nixosModules.home-manager
+          {
+            home-manager.useGlobalPkgs = true;
+            home-manager.useUserPackages = true;
+            home-manager.users.aydin = import ./hosts/zeus/home.nix;
+          }
+        ];
       };
 
       homeConfigurations."aydin@hades" = home-manager.lib.homeManagerConfiguration {
