@@ -78,10 +78,10 @@
         SetEnv.TERM = "xterm-256color";
       };
       zeus-local = {
-        HostName = "10.0.12.15";
+        HostName = "10.0.12.12";
         Port = 22;
         User = "aydin";
-        IdentityFile = "~/.ssh/id_ed25519_zeus_2025-07-13";
+        IdentityFile = "~/.ssh/zeus";
         IdentitiesOnly = true;
         SetEnv.TERM = "xterm-256color";
       };

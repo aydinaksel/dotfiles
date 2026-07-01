@@ -1,4 +1,9 @@
-{ config, lib, pkgs, ... }:
+{
+  config,
+  lib,
+  pkgs,
+  ...
+}:
 
 {
   imports = [
@@ -22,7 +27,11 @@
   };
 
   nixpkgs.config.allowUnfreePredicate =
-    package: builtins.elem (lib.getName package) [ "claude-code" "bws" ];
+    package:
+    builtins.elem (lib.getName package) [
+      "claude-code"
+      "bws"
+    ];
 
   users.users = {
     root.hashedPassword = "!";
@@ -31,7 +40,7 @@
       extraGroups = [ "wheel" ];
       shell = pkgs.nushell;
       openssh.authorizedKeys.keys = [
-        "ssh-ed25519 AAAAC3NzaC1lZDI1NTE5AAAAILjiVN9Wh8FP+c1nHYSrQ0jztfymnEomxwxNVoW7/Iqy zeus key for hades"
+        "ssh-ed25519 AAAAC3NzaC1lZDI1NTE5AAAAINsxjFjrSymUk/ppxj6SpngzUV563B8cK5s1coIuPGjs"
       ];
     };
   };
