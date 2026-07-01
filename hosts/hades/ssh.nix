@@ -70,10 +70,10 @@
         SetEnv.TERM = "xterm-256color";
       };
       zeus = {
-        HostName = "zeus.darter-bebop.ts.net";
+        HostName = "100.71.193.27";
         Port = 22;
         User = "aydin";
-        IdentityFile = "~/.ssh/id_ed25519_zeus_2025-07-13";
+        IdentityFile = "~/.ssh/zeus.pub";
         IdentitiesOnly = true;
         SetEnv.TERM = "xterm-256color";
       };
