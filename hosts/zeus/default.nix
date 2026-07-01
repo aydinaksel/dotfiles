@@ -17,7 +17,11 @@
   boot.loader.efi.canTouchEfiVariables = true;
 
   networking.hostName = "zeus";
-  networking.networkmanager.enable = true;
+  networking.useNetworkd = true;
+  systemd.network.networks."10-wired" = {
+    matchConfig.Name = "en*";
+    networkConfig.DHCP = "yes";
+  };
 
   time.timeZone = "Europe/London";
 
@@ -39,6 +43,7 @@
       isNormalUser = true;
       extraGroups = [ "wheel" ];
       shell = pkgs.nushell;
+      hashedPassword = "$6$5ZEf7lev8WfyVJLs$Y/mE439JjgK6hpsKIhTcJ5aCOBqZYjIvhsbHPmHSloRskzuJs//xehd9urN2EoJYoSwSjm5rKeg9Z3/MAf8Gw1";
       openssh.authorizedKeys.keys = [
         "ssh-ed25519 AAAAC3NzaC1lZDI1NTE5AAAAINsxjFjrSymUk/ppxj6SpngzUV563B8cK5s1coIuPGjs"
       ];
@@ -48,6 +53,10 @@
   environment.shells = [ pkgs.nushell ];
 
   security.sudo.wheelNeedsPassword = false;
+
+  services.xserver.enable = true;
+  services.displayManager.gdm.enable = true;
+  services.desktopManager.gnome.enable = true;
 
   services.openssh = {
     enable = true;
