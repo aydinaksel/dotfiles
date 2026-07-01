@@ -54,6 +54,7 @@
           $env.PATH
           | split row (char esep)
           | prepend [
+              "/run/wrappers/bin"
               $"($env.HOME)/bin"
               $"($env.HOME)/.local/bin"
               $"($env.CARGO_HOME)/bin"
