@@ -37,6 +37,7 @@
       "bws"
     ];
 
+  users.mutableUsers = false;
   users.users = {
     root.hashedPassword = "!";
     aydin = {
