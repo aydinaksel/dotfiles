@@ -25,6 +25,12 @@ let
       group = "github-runner";
       trailingNewline = true;
     };
+    "aydin-github-ssh-key" = {
+      uuid = "c60aa092-c41a-499f-a6fc-b47a01689349";
+      owner = "aydin";
+      group = "users";
+      trailingNewline = true;
+    };
     "tailscale-oauth-client-secret" = {
       uuid = "a7ea5f37-e75a-4cfd-9e93-b47a00d72a1b";
       owner = "root";

@@ -51,6 +51,11 @@
     };
   };
 
+  systemd.tmpfiles.rules = [
+    "d /home/aydin/.ssh 0700 aydin users -"
+    "L+ /home/aydin/.ssh/id_ed25519 - - - - /run/secrets/aydin-github-ssh-key"
+  ];
+
   environment.shells = [ pkgs.nushell ];
 
   security.sudo.wheelNeedsPassword = false;
