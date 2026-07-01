@@ -23,6 +23,14 @@ let
       HostName 5.78.186.219
       User aydin
 
+    Host pan
+      HostName 5.161.195.52
+      User aydin
+
+    Host dionysus
+      HostName 178.156.169.27
+      User aydin
+
     Host *
       IdentityFile ${deployKeyPath}
       IdentitiesOnly yes
