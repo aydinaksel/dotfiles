@@ -81,7 +81,7 @@
         HostName = "10.0.12.12";
         Port = 22;
         User = "aydin";
-        IdentityFile = "~/.ssh/zeus";
+        IdentityFile = "~/.ssh/zeus.pub";
         IdentitiesOnly = true;
         SetEnv.TERM = "xterm-256color";
       };
