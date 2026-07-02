@@ -32,21 +32,16 @@
 
   nixpkgs.config.allowUnfreePredicate =
     package:
-    let
-      packageName = lib.getName package;
-    in
-    builtins.elem packageName [
+    builtins.elem (lib.getName package) [
       "blender"
       "claude-code"
       "bws"
       "nvidia-x11"
       "nvidia-settings"
       "nvidia-persistenced"
+      "nvidia-kernel-modules"
     ]
-    || lib.hasPrefix "cuda" packageName
-    || lib.hasPrefix "libcu" packageName
-    || lib.hasPrefix "libnv" packageName
-    || lib.hasInfix "optix" packageName;
+    || pkgs._cuda.lib.allowUnfreeCudaPredicate package;
 
   users.mutableUsers = false;
   users.users = {
