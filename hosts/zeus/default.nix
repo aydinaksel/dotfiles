@@ -69,6 +69,14 @@
   services.xserver.enable = true;
   services.displayManager.gdm.enable = true;
   services.desktopManager.gnome.enable = true;
+  services.desktopManager.gnome.extraGSettingsOverrides = ''
+    [org.gnome.settings-daemon.plugins.power]
+    sleep-inactive-ac-type='nothing'
+    sleep-inactive-battery-type='nothing'
+  '';
+  services.desktopManager.gnome.extraGSettingsOverridePackages = [
+    pkgs.gnome-settings-daemon
+  ];
 
   systemd.targets.sleep.enable = false;
   systemd.targets.suspend.enable = false;
