@@ -32,10 +32,20 @@
 
   nixpkgs.config.allowUnfreePredicate =
     package:
-    builtins.elem (lib.getName package) [
+    let
+      packageName = lib.getName package;
+    in
+    builtins.elem packageName [
       "claude-code"
       "bws"
-    ];
+      "nvidia-x11"
+      "nvidia-settings"
+      "nvidia-persistenced"
+    ]
+    || lib.hasPrefix "cuda" packageName
+    || lib.hasPrefix "libcu" packageName
+    || lib.hasPrefix "libnv" packageName
+    || lib.hasInfix "optix" packageName;
 
   users.mutableUsers = false;
   users.users = {
@@ -64,6 +74,17 @@
   services.displayManager.gdm.enable = true;
   services.desktopManager.gnome.enable = true;
 
+  services.xserver.videoDrivers = [ "nvidia" ];
+
+  hardware.graphics.enable = true;
+
+  hardware.nvidia = {
+    modesetting.enable = true;
+    open = false;
+    nvidiaSettings = true;
+    package = config.boot.kernelPackages.nvidiaPackages.stable;
+  };
+
   services.openssh = {
     enable = true;
     openFirewall = true;
@@ -79,6 +100,8 @@
     git
     gh
     htop
+    (blender.override { cudaSupport = true; })
+    freecad
   ];
 
   system.stateVersion = "26.05";
