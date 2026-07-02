@@ -36,6 +36,7 @@
       packageName = lib.getName package;
     in
     builtins.elem packageName [
+      "blender"
       "claude-code"
       "bws"
       "nvidia-x11"
