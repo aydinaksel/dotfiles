@@ -1,4 +1,4 @@
-{ pkgs, lib, ... }:
+{ pkgs, lib, config, ... }:
 let
   inherit (lib.hm.gvariant)
     mkArray
@@ -8,6 +8,8 @@ let
     mkDouble
     mkDictionaryEntry
     ;
+
+  bitwardenSshAgentSocket = "${config.home.homeDirectory}/.bitwarden-ssh-agent.sock";
 
   mkWorldClock =
     {
@@ -75,6 +77,8 @@ in
     ../../modules/zellij.nix
     ../../modules/alacritty.nix
     ../../modules/alacritty-linux.nix
+    ../../modules/obsidian-headless
+    ../../modules/ssh.nix
   ];
 
   programs.alacritty.package = lib.mkForce pkgs.alacritty;
@@ -153,13 +157,28 @@ in
   };
 
   programs.nushell.extraEnv = ''
-    $env.SSH_AUTH_SOCK = $"($env.XDG_RUNTIME_DIR? | default $'/run/user/(id -u | str trim)')/ssh-agent.socket"
+    $env.SSH_AUTH_SOCK = "${bitwardenSshAgentSocket}"
     $env.GIT_SSH_COMMAND = "ssh"
   '';
+
+  # GUI apps launched from GNOME inherit SSH_AUTH_SOCK from the systemd user
+  # session. Take it back from gnome-keyring's ssh agent so those apps use the
+  # same Bitwarden keys as the shell. Only the ssh component is disabled; the
+  # secrets and pkcs11 components keep running.
+  xdg.configFile = {
+    "environment.d/10-ssh-auth-sock.conf".text = ''
+      SSH_AUTH_SOCK=${bitwardenSshAgentSocket}
+    '';
+    "autostart/gnome-keyring-ssh.desktop".text = ''
+      [Desktop Entry]
+      Hidden=true
+    '';
+  };
 
   home.packages = with pkgs; [
     nerd-fonts.jetbrains-mono
     bat
+    bitwarden-desktop
     curl
     dust
     jq

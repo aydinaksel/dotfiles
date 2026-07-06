@@ -15,10 +15,14 @@
       url = "github:nix-community/nixGL";
       inputs.nixpkgs.follows = "nixpkgs";
     };
+    uber-tickets = {
+      url = "git+file:///home/aydin/Projects/uber-tickets";
+      inputs.nixpkgs.follows = "nixpkgs";
+    };
   };
 
   outputs =
-    {
+    inputs@{
       nixpkgs,
       home-manager,
       nix-darwin,
@@ -39,6 +43,7 @@
     {
       nixosConfigurations.zeus = nixpkgs.lib.nixosSystem {
         system = "x86_64-linux";
+        specialArgs = { inherit inputs; };
         modules = [
           ./hosts/zeus
           home-manager.nixosModules.home-manager

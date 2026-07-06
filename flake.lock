@@ -100,7 +100,8 @@
         "home-manager": "home-manager",
         "nix-darwin": "nix-darwin",
         "nixgl": "nixgl",
-        "nixpkgs": "nixpkgs"
+        "nixpkgs": "nixpkgs",
+        "uber-tickets": "uber-tickets"
       }
     },
     "systems": {
@@ -116,6 +117,26 @@
         "owner": "nix-systems",
         "repo": "default",
         "type": "github"
+      }
+    },
+    "uber-tickets": {
+      "inputs": {
+        "nixpkgs": [
+          "nixpkgs"
+        ]
+      },
+      "locked": {
+        "lastModified": 1783354255,
+        "narHash": "sha256-Hb2rCNutQDjgqyS+MksIBhopf+hEjsIvtL+kr9oYjFU=",
+        "ref": "refs/heads/main",
+        "rev": "60724219c3b53f93896942ddd303110de9aef9af",
+        "revCount": 2,
+        "type": "git",
+        "url": "file:///home/aydin/Projects/uber-tickets"
+      },
+      "original": {
+        "type": "git",
+        "url": "file:///home/aydin/Projects/uber-tickets"
       }
     }
   },

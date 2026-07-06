@@ -11,6 +11,7 @@
     ./secrets.nix
     ./tailscale.nix
     ./github-runners.nix
+    ./uber-tickets.nix
   ];
 
   boot.loader.systemd-boot.enable = true;
@@ -47,6 +48,8 @@
       "nvidia-kernel-modules"
     ]
     || pkgs._cuda.lib.allowUnfreeCudaPredicate package;
+
+  nixpkgs.config.permittedInsecurePackages = [ "electron-39.8.10" ];
 
   users.mutableUsers = false;
   users.users = {
@@ -120,6 +123,7 @@
     obsidian
     gimp
     inkscape
+    beekeeper-studio
   ];
 
   environment.gnome.excludePackages = with pkgs; [

@@ -101,14 +101,20 @@ in
 
       # Comments
 
-      Avoid comments. If you feel the need to write one, first try to make the code self-documenting:
+      Do not write comments. This is a hard default, not a preference. The
+      overwhelming majority of code should ship with zero comments. Do not
+      narrate what the code does, restate a name, or explain a decision that the
+      diff or commit message already carries. When you feel the urge to comment,
+      that urge is a signal to fix the code instead:
 
       - Extract magic values into named constants.
       - Name variables and functions to express intent, so the code reads like the comment would.
       - Move complex conditions into named functions or variables.
       - Use types to encode constraints instead of describing them in comments (e.g. `optional<T>` instead of a `-1` convention).
 
-      Comments are acceptable in narrow cases:
+      A comment is justified only when it is genuinely impossible to encode the
+      information in the code itself, and its absence would mislead the next
+      reader. That is rare. When in doubt, leave it out. The narrow exceptions:
 
       - Non-obvious code written for performance reasons, explain *why* it looks weird.
       - References to a specific algorithm or mathematical principle, link to the source.
