@@ -25,6 +25,10 @@
 
   time.timeZone = "Europe/London";
 
+  i18n.extraLocaleSettings = {
+    LC_TIME = "en_GB.UTF-8";
+  };
+
   nix.settings = {
     experimental-features = "nix-command flakes";
     trusted-users = [ "aydin" ];
@@ -35,6 +39,7 @@
     builtins.elem (lib.getName package) [
       "blender"
       "claude-code"
+      "obsidian"
       "bws"
       "nvidia-x11"
       "nvidia-settings"
@@ -109,8 +114,18 @@
     git
     gh
     htop
+    firefox-devedition
     (blender.override { cudaSupport = true; })
     freecad
+    obsidian
+    gimp
+    inkscape
+  ];
+
+  environment.gnome.excludePackages = with pkgs; [
+    epiphany
+    gnome-tour
+    yelp
   ];
 
   system.stateVersion = "26.05";
