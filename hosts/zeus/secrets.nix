@@ -38,7 +38,7 @@ let
     };
   };
 
-  automationSecrets = {
+  personalAutomationSecrets = {
     "gmail-app-password" = {
       uuid = "b8d60c1c-b664-4cbc-be3c-b47f010b8979";
       owner = "aydin";
@@ -108,9 +108,9 @@ let
       accessTokenPath = "/var/lib/bws/access-token";
       secrets = infraSecrets;
     };
-    bws-secrets-automation = {
+    bws-secrets-personal-automation = {
       accessTokenPath = "/var/lib/bws/personal-automation-access-token";
-      secrets = automationSecrets;
+      secrets = personalAutomationSecrets;
     };
   };
 in

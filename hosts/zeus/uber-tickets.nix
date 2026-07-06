@@ -9,10 +9,10 @@ in
     description = "Fetch Uber train tickets into Obsidian and the Cloudflare R2 calendar feed";
     after = [
       "network-online.target"
-      "bws-secrets-automation.service"
+      "bws-secrets-personal-automation.service"
     ];
     wants = [ "network-online.target" ];
-    requires = [ "bws-secrets-automation.service" ];
+    requires = [ "bws-secrets-personal-automation.service" ];
 
     serviceConfig = {
       Type = "oneshot";

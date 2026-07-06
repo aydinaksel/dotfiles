@@ -46,6 +46,7 @@
       "nvidia-settings"
       "nvidia-persistenced"
       "nvidia-kernel-modules"
+      "fastmail-desktop"
     ]
     || pkgs._cuda.lib.allowUnfreeCudaPredicate package;
 
@@ -124,6 +125,7 @@
     gimp
     inkscape
     beekeeper-studio
+    fastmail-desktop
   ];
 
   environment.gnome.excludePackages = with pkgs; [
