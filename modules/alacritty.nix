@@ -9,7 +9,7 @@
           y = 16;
         };
         dynamic_padding = true;
-        decorations = "None";
+        decorations = "Full";
         opacity = 1.0;
         startup_mode = "Windowed";
       };
@@ -18,7 +18,7 @@
         multiplier = 3;
       };
       font = {
-        size = 11.0;
+        size = 13.0;
         normal = {
           family = "JetBrainsMono Nerd Font Mono";
           style = "Regular";
