@@ -73,9 +73,11 @@ in
 
       # Dotfiles
 
-      Config files under `~/.config/` and `~/.claude/` are managed by Home Manager (Nix).
-      They are read-only symlinks to the Nix store. To change them, edit the source files
-      in `~/dotfiles/` and rebuild with `home-manager switch --flake ~/dotfiles`.
+      Zeus is a NixOS machine; hades and poseidon are Home-Manager-only.
+      Dotfiles live in `~/dotfiles` (or `~/Projects/dotfiles`). Config under `~/.config/`
+      and `~/.claude/` are read-only symlinks to the Nix store; edit the source in dotfiles
+      and rebuild. On zeus: `sudo nixos-rebuild switch --flake ~/dotfiles#zeus`.
+      On hades/poseidon: `home-manager switch --flake ~/dotfiles`.
 
       # Naming Conventions
 
