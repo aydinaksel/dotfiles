@@ -23,6 +23,14 @@ let
       HostName 5.78.186.219
       User aydin
 
+    Host apollo
+      HostName 157.180.27.246
+      User aydin
+
+    Host atlas
+      HostName 46.62.204.137
+      User aydin
+
     Host pan
       HostName 5.161.195.52
       User aydin
