@@ -126,6 +126,7 @@
     inkscape
     beekeeper-studio
     fastmail-desktop
+    audacity
   ];
 
   environment.gnome.excludePackages = with pkgs; [
