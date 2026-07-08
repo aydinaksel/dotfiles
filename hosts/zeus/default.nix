@@ -127,6 +127,7 @@
     beekeeper-studio
     fastmail-desktop
     audacity
+    cliamp
   ];
 
   environment.gnome.excludePackages = with pkgs; [
