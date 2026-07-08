@@ -127,8 +127,8 @@
     beekeeper-studio
     fastmail-desktop
     audacity
-    cliamp
     megacmd
+    vlc
   ];
 
   environment.gnome.excludePackages = with pkgs; [
