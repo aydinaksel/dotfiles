@@ -128,6 +128,7 @@
     fastmail-desktop
     audacity
     cliamp
+    megacmd
   ];
 
   environment.gnome.excludePackages = with pkgs; [
