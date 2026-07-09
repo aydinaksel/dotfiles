@@ -47,6 +47,7 @@
       "nvidia-persistenced"
       "nvidia-kernel-modules"
       "fastmail-desktop"
+      "slack"
     ]
     || pkgs._cuda.lib.allowUnfreeCudaPredicate package;
 
@@ -129,6 +130,7 @@
     audacity
     megacmd
     vlc
+    slack
   ];
 
   environment.gnome.excludePackages = with pkgs; [
