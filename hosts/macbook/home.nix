@@ -52,6 +52,7 @@
     nixfmt
     ripgrep
     ruff
+    snowflake-cli
     tailscale
     tree-sitter
   ];
