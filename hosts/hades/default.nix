@@ -33,17 +33,20 @@ in
   };
 
   # GUI apps launched from GNOME inherit SSH_AUTH_SOCK from the systemd user
-  # session. Take it back from gnome-keyring's ssh agent so those apps use the
-  # same Bitwarden keys as the shell. Only the ssh component is disabled; the
-  # secrets and pkcs11 components keep running.
+  # session. Point it at Bitwarden so those apps (e.g. Beekeeper Studio) use
+  # the same keys as the shell.
+  #
+  # On Fedora, gcr-ssh-agent.socket runs an ExecStartPost that calls
+  # `systemctl --user set-environment SSH_AUTH_SOCK=%t/gcr/ssh`, clobbering the
+  # environment.d value at every login. Masking the socket stops that, letting
+  # 10-ssh-auth-sock.conf win. gcr's secrets and pkcs11 components are separate
+  # units and keep running.
   xdg.configFile = {
     "environment.d/10-ssh-auth-sock.conf".text = ''
       SSH_AUTH_SOCK=${bitwardenSshAgentSocket}
     '';
-    "autostart/gnome-keyring-ssh.desktop".text = ''
-      [Desktop Entry]
-      Hidden=true
-    '';
+    "systemd/user/gcr-ssh-agent.socket".source =
+      config.lib.file.mkOutOfStoreSymlink "/dev/null";
   };
 
   fonts.fontconfig.enable = true;
