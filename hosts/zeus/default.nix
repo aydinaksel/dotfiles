@@ -135,6 +135,7 @@
     _1password-gui
     amberol
     gramps
+    eartag
   ];
 
   environment.gnome.excludePackages = with pkgs; [
