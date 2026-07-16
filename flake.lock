@@ -126,11 +126,11 @@
         ]
       },
       "locked": {
-        "lastModified": 1783357752,
-        "narHash": "sha256-vgyqXWqLkEv+QzK1DVuIqQSw3q+UGXyUsxYvtVp1QuY=",
+        "lastModified": 1784197155,
+        "narHash": "sha256-XcaUf8VuHZMDRipiG0/fu5SBjoBRxFjsrL7L/jtCSi8=",
         "ref": "refs/heads/main",
-        "rev": "4474d045062023539148c541d69c45ee111a0369",
-        "revCount": 3,
+        "rev": "3ccabcfe4f21f898d2993ff1896fd0c512ae2016",
+        "revCount": 5,
         "type": "git",
         "url": "file:///home/aydin/Projects/uber-tickets"
       },
