@@ -76,9 +76,9 @@ return {
                 },
                 apex_ls = {
                     cmd = {
-                        "java",
+                        "@apexJava@",
                         "-jar",
-                        vim.fn.expand("~/.local/bin/apex-jorje-lsp.jar"),
+                        "@apexLanguageServerJar@",
                     },
                     filetypes = { "apex" },
                 },
