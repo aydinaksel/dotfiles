@@ -48,6 +48,7 @@
       "nvidia-kernel-modules"
       "fastmail-desktop"
       "slack"
+      "1password"
     ]
     || pkgs._cuda.lib.allowUnfreeCudaPredicate package;
 
@@ -131,6 +132,7 @@
     megacmd
     vlc
     slack
+    _1password-gui
   ];
 
   environment.gnome.excludePackages = with pkgs; [
