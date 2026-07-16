@@ -133,6 +133,8 @@
     vlc
     slack
     _1password-gui
+    amberol
+    gramps
   ];
 
   environment.gnome.excludePackages = with pkgs; [
