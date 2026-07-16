@@ -71,6 +71,12 @@ in
     context = ''
       @rules/rust-structured-logging.md
 
+      # Running Commands
+
+      Use `nix` when running commands as the host machine likely doesn't have what you need
+      installed. For example, I don't have `cargo` installed globally, you will need to run it
+      with `nix`.
+
       # Dotfiles
 
       Zeus is a NixOS machine; hades and poseidon are Home-Manager-only.
