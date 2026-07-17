@@ -133,7 +133,6 @@
     vlc
     slack
     _1password-gui
-    amberol
     gramps
     eartag
   ];
