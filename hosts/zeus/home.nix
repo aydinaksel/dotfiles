@@ -78,7 +78,6 @@ in
     ../../modules/alacritty.nix
     ../../modules/alacritty-linux.nix
     ../../modules/obsidian-headless
-    ../../modules/megacmd-server.nix
     ../../modules/ssh.nix
   ];
 
